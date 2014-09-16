@@ -1,0 +1,193 @@
+# i3 config file (v4)
+# install: ~/.i3/config
+
+# Super
+set $mod Mod4
+
+# Section: Startup programs
+exec --no-startup-id redshift
+exec --no-startup-id feh --bg-fill /usr/share/backgrounds/logo-of-love-2560x1440-wallpaper-14939.jpg
+exec --no-startup-id nm-applet
+exec --no-startup-id gnome-settings-daemon
+exec --no-startup-id dropbox start
+
+# Assign to workspace
+# exec --no-startup-id i3-msg 'workspace 2; exec google-chrome; workspace 1'
+assign [class="Google-chrome"] 1
+assign [class="Firefox"] 1
+
+exec spotify
+for_window [class="Spotify"] move scratchpad, border 1 pixel
+bindsym Mod1+s [class="Spotify"] scratchpad show
+
+# use xprop to find class and title
+for_window [class="Gnome-calculator"] floating enable
+#for_window [class="Xfce4-notifyd"] floating enable
+for_window [class="File-roller"] floating enable
+
+# Section: Program shortcuts
+# start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+n exec firefox
+# bindsym $mod+p exec dmenu_run
+bindsym $mod+p exec j4-dmenu-desktop
+# text editor
+bindsym $mod+o exec sublime
+
+# Change volume
+bindsym Mod1+k exec ~/.i3/change_volume.py +10
+bindsym Mod1+j exec ~/.i3/change_volume.py -10
+
+# Section: Window managing
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+b split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+bindsym $mod+d focus child
+
+# Screen lock and exit
+bindsym control+Mod1+l exec i3lock -c 000000
+bindsym $mod+x exec ~/.i3/i3-exit.py
+for_window [class="I3-exit" instance="i3-exit"] floating enable
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+workspace_auto_back_and_forth yes
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+p exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# Section: Resizing and moving
+mode "resize" {
+  # These bindings trigger as soon as you enter the resize mode
+  bindsym h resize shrink width 10 px or 10 ppt
+  bindsym j resize grow height 10 px or 10 ppt
+  bindsym k resize shrink height 10 px or 10 ppt
+  bindsym l resize grow width 10 px or 10 ppt
+
+  # same bindings, but for the arrow keys
+  bindsym Left resize shrink width 10 px or 10 ppt
+  bindsym Down resize grow height 10 px or 10 ppt
+  bindsym Up resize shrink height 10 px or 10 ppt
+  bindsym Right resize grow width 10 px or 10 ppt
+
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+# Use Alt to directly resize windows
+bindsym Mod1+h resize grow width 10 px or 10 ppt
+bindsym Mod1+l resize shrink width 10 px or 10 ppt
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Section: GUI
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below. ISO 10646 = Unicode
+font pango: Ubuntu Mono 10
+
+# Window title color
+#colorclass #border #background #text #indicator
+client.focused #325bd6 #003757 #ccd6f4 #0075b9
+client.focused_inactive #333333 #5F676A #ffffff #484E50
+client.unfocused #333333 #424242 #888888 #292D2E
+client.urgent #C10004 #900000 #ffffff #900000
+# Wait before switching from urgency to focused
+force_display_urgency_hint 500 ms
+
+# Start i3bar to display a workspace bar, using i3status
+bar {
+  #status_command i3status
+  # Wrapper must be executable
+  status_command i3status
+  colors {
+    background #232323
+    statusline #dcdcdc
+
+    # Same color scheme as the windows
+    focused_workspace #325bd6 #003757 #ccd6f4
+    active_workspace #333333 #5F676A #ffffff
+    inactive_workspace #333333 #424242 #888888
+    urgent_workspace #C10004 #900000 #ffffff
+  }
+}
