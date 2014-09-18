@@ -34,9 +34,14 @@ bindsym $mod+p exec j4-dmenu-desktop
 # text editor
 bindsym $mod+o exec sublime
 
-# Change volume
+# Script for chaning volume
 bindsym Mod1+k exec ~/.i3/change_volume.py +10
 bindsym Mod1+j exec ~/.i3/change_volume.py -10
+
+# Script for controling spotify via dbus
+bindsym Ctrl+$mod+Left exec ~/.i3/spotify-control.py prev
+bindsym Ctrl+$mod+Right exec ~/.i3/spotify-control.py next
+bindsym Ctrl+$mod+Down exec ~/.i3/spotify-control.py playpause
 
 # Section: Window managing
 # kill focused window
