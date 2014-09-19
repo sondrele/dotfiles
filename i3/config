@@ -11,15 +11,13 @@ exec --no-startup-id nm-applet
 exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id dropbox start
 exec --no-startup-id dunst
-
-# Assign to workspace
-# exec --no-startup-id i3-msg 'workspace 2; exec google-chrome; workspace 1'
-assign [class="Google-chrome"] 1
-assign [class="Firefox"] 1
-
-exec spotify
+exec --no-startup-id spotify
 for_window [class="Spotify"] move scratchpad, border 1 pixel
 bindsym Mod1+s [class="Spotify"] scratchpad show
+
+# Assign to workspace
+assign [class="Google-chrome"] 1
+assign [class="Firefox"] 1
 
 # use xprop to find class and title
 for_window [class="Gnome-calculator"] floating enable
@@ -27,22 +25,20 @@ for_window [class="Gnome-calculator"] floating enable
 for_window [class="File-roller"] floating enable
 
 # Section: Program shortcuts
-# start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+n exec firefox
-# bindsym $mod+p exec dmenu_run
-bindsym $mod+p exec j4-dmenu-desktop
-# text editor
-bindsym $mod+o exec sublime
+bindsym $mod+n      exec firefox
+# bindsym $mod+p    exec dmenu_run
+bindsym $mod+p      exec j4-dmenu-desktop
+bindsym $mod+o      exec sublime
 
-# Script for chaning volume
+# Script for changing volume
 bindsym Mod1+k exec ~/.i3/change_volume.py +10
 bindsym Mod1+j exec ~/.i3/change_volume.py -10
 
-# Script for controling spotify via dbus
-bindsym Ctrl+$mod+Left exec ~/.i3/spotify-control.py prev
+# Script for controlling spotify via dbus
+bindsym Ctrl+$mod+Left  exec ~/.i3/spotify-control.py prev
 bindsym Ctrl+$mod+Right exec ~/.i3/spotify-control.py next
-bindsym Ctrl+$mod+Down exec ~/.i3/spotify-control.py playpause
+bindsym Ctrl+$mod+Down  exec ~/.i3/spotify-control.py playpause
 
 # Section: Window managing
 # kill focused window
@@ -98,7 +94,7 @@ bindsym $mod+d focus child
 
 # Screen lock and exit
 bindsym control+Mod1+l exec i3lock -c 000000
-bindsym $mod+x exec ~/.i3/i3-exit.py
+bindsym $mod+x         exec ~/.i3/i3-exit.py
 for_window [class="I3-exit" instance="i3-exit"] floating enable
 
 # switch to workspace
@@ -142,12 +138,6 @@ mode "resize" {
   bindsym k resize shrink height 10 px or 10 ppt
   bindsym l resize grow width 10 px or 10 ppt
 
-  # same bindings, but for the arrow keys
-  bindsym Left resize shrink width 10 px or 10 ppt
-  bindsym Down resize grow height 10 px or 10 ppt
-  bindsym Up resize shrink height 10 px or 10 ppt
-  bindsym Right resize grow width 10 px or 10 ppt
-
   # back to normal: Enter or Escape
   bindsym Return mode "default"
   bindsym Escape mode "default"
@@ -168,10 +158,10 @@ font pango: Ubuntu Mono 10
 
 # Window title color
 #colorclass #border #background #text #indicator
-client.focused #325bd6 #003757 #ccd6f4 #0075b9
+client.focused          #325bd6 #003757 #ccd6f4 #0075b9
 client.focused_inactive #333333 #5F676A #ffffff #484E50
-client.unfocused #333333 #424242 #888888 #292D2E
-client.urgent #C10004 #900000 #ffffff #900000
+client.unfocused        #333333 #424242 #888888 #292D2E
+client.urgent           #C10004 #900000 #ffffff #900000
 # Wait before switching from urgency to focused
 force_display_urgency_hint 500 ms
 
@@ -185,9 +175,9 @@ bar {
     statusline #dcdcdc
 
     # Same color scheme as the windows
-    focused_workspace #325bd6 #003757 #ccd6f4
-    active_workspace #333333 #5F676A #ffffff
+    focused_workspace  #325bd6 #003757 #ccd6f4
+    active_workspace   #333333 #5F676A #ffffff
     inactive_workspace #333333 #424242 #888888
-    urgent_workspace #C10004 #900000 #ffffff
+    urgent_workspace   #C10004 #900000 #ffffff
   }
 }
