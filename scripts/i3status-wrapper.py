@@ -10,11 +10,11 @@ def exec_command(command):
     return subprocess.check_output(command, shell=True)
 
 def get_artist(data):
-    artist = re.compile("(?<=artist: )[A-Za-z\t .]+").findall(data)
+    artist = re.compile("(?<=artist: )[^\n]*", re.UNICODE).findall(data)
     return artist[0]
 
 def get_title(data):
-    title = re.compile("(?<=title: )[A-Za-z\t .]+").findall(data)
+    title = re.compile("(?<=title: )[^\n]*", re.UNICODE).findall(data)
     return title[0]
 
 def get_metadata():
