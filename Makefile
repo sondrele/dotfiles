@@ -17,7 +17,7 @@ PY_SCRIPTS=change-volume.py\
 	i3status-wrapper.py\
 	spotify-control.py
 
-.PHONY: all directories bash i3configs i3scrip
+.PHONY: all directories bash i3configs i3scripts
 
 all: directories bash i3configs i3scripts
 	@echo "[Installed all in: $(INSTALL_DIR)]"
