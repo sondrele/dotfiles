@@ -1,5 +1,15 @@
 # install: ~/.bash_utils
 
+# Requires python Pygments (pip install Pygments)
+function colorize() {
+  lexer="-g"
+  if [ "$2" ]; then
+    lexer="-l$2";
+  fi
+  cat "$1" | pygmentize "$lexer"
+}
+
+
 # search for word in a PDF-file from a folder (defaulting to the current folder)
 # example: pdfs "hallo" ../
 function pdfs {

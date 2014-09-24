@@ -2,6 +2,7 @@
 
 # ls
 alias ls="ls --color=auto"
+alias l="ls"
 alias ll="ls -hog"
 alias la="ls -A"
 # ls last file changed
