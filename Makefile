@@ -19,7 +19,7 @@ PY_SCRIPTS=change-volume.py\
 
 .PHONY: all directories bash i3configs i3scripts
 
-all: directories bash i3configs i3scripts
+all: directories bash i3configs i3scripts gitconfig
 	@echo "[Installed all in: $(INSTALL_DIR)]"
 
 directories: $(DIRS)
@@ -45,3 +45,6 @@ i3configs:
 
 i3scripts: $(PY_SCRIPTS)
 	@echo "[Linked python scripts]"
+
+gitconfig:
+	cp $(SRC_DIR)/git/gitconfig $(INSTALL_DIR)/.gitconfig
