@@ -1,0 +1,9 @@
+{
+  "tab_size": 2,
+  "translate_tabs_to_spaces": true,
+  "theme": "Soda Dark 3.sublime-theme",
+  "ignored_packages": [
+    "Vintage",
+    "Makefile"
+  ]
+}
