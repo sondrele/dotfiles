@@ -12,3 +12,5 @@
 	name = Sondre Lefsaker
 [push]
 	default = simple
+[color]
+  ui = true
