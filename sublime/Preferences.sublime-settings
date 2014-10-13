@@ -1,9 +1,12 @@
 {
+  "always_show_minimap_viewport": true,
+  "color_scheme": "Packages/User/Monokai (SL).tmTheme",
+  "ignored_packages":
+  [
+    "Makefile",
+    "Vintage"
+  ],
   "tab_size": 2,
-  "translate_tabs_to_spaces": true,
   "theme": "Soda Dark 3.sublime-theme",
-  "ignored_packages": [
-    "Vintage",
-    "Makefile"
-  ]
+  "translate_tabs_to_spaces": true
 }
