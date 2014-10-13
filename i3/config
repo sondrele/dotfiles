@@ -20,7 +20,7 @@ assign [class="Google-chrome"] 1
 assign [class="Firefox"] 1
 
 # use xprop to find class and title
-for_window [class="Gnome-calculator"] floating enable
+for_window [class="Gcalctool"] floating enable
 #for_window [class="Xfce4-notifyd"] floating enable
 for_window [class="File-roller"] floating enable
 
