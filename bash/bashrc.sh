@@ -18,6 +18,11 @@ if [ -f "$HOME/.bash_utils" ]; then
 . "$HOME/.bash_utils"
 fi
 
+# load user binaries to the path if they exist
+if [ -d "$HOME/bin" ]; then
+  PATH=$PATH:$HOME/bin
+fi
+
 # Bash completion
 if [ -f "/etc/bash_completion" ]; then
 . "/etc/bash_completion"
