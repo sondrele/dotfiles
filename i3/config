@@ -32,8 +32,8 @@ bindsym $mod+p      exec j4-dmenu-desktop
 bindsym $mod+o      exec sublime
 
 # Script for changing volume
-bindsym Mod1+k exec ~/.i3/change_volume.py +10
-bindsym Mod1+j exec ~/.i3/change_volume.py -10
+bindsym Mod1+k exec amixer -D pulse sset Master 10%+
+bindsym Mod1+j exec amixer -D pulse sset Master 10%-
 
 # Script for controlling spotify via dbus
 bindsym Ctrl+$mod+Left  exec ~/.i3/spotify-control.py prev
