@@ -1,5 +1,7 @@
 # install: ~/.bash_aliases
 
+alias diff="colordiff"
+
 # ls
 alias ls="ls --color=auto"
 alias l="ls"
