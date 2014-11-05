@@ -15,10 +15,6 @@ exec --no-startup-id spotify
 for_window [class="Spotify"] move scratchpad, border 1 pixel
 bindsym Mod1+s [class="Spotify"] scratchpad show
 
-# Assign to workspace
-assign [class="Google-chrome"] 1
-assign [class="Firefox"] 1
-
 # use xprop to find class and title
 for_window [class="Gcalctool"] floating enable
 #for_window [class="Xfce4-notifyd"] floating enable
@@ -154,7 +150,7 @@ floating_modifier $mod
 # Section: GUI
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
-font pango: Ubuntu Mono 10
+font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 
 # Window title color
 #colorclass #border #background #text #indicator
@@ -165,8 +161,12 @@ client.urgent           #C10004 #900000 #ffffff #900000
 # Wait before switching from urgency to focused
 force_display_urgency_hint 500 ms
 
+
 # Start i3bar to display a workspace bar, using i3status
 bar {
+  # show tray icons on the primary monitor
+  tray_output primary
+
   #status_command i3status
   # Wrapper must be executable
   status_command i3status | ~/.i3/i3status-wrapper.py
