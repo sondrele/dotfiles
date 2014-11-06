@@ -1,3 +1,3 @@
-my-linux
+dotfiles
 ========
 Utilities and configuration for my linux environment.

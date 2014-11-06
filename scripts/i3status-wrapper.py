@@ -7,7 +7,10 @@ import json
 import re
 
 def exec_command(command):
-    return subprocess.check_output(command, shell=True)
+    try:
+        result = subprocess.check_output(command, shell=True)
+    finally:
+        return result if result != "" else "Offline"
 
 def get_artist(data):
     artist = re.compile("(?<=artist: )[^\n]*", re.UNICODE).findall(data)
@@ -25,26 +28,27 @@ def is_playing():
     metadata = exec_command("qdbus org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlaybackStatus")
     return metadata.strip() == "Playing"
 
+def create_result(now_playing, color):
+    return {
+        "full_text": "♪: %s" % now_playing,
+        "name": "spotify",
+        "color": color
+    }
+
 def get_spotify_status():
     metadata = get_metadata()
-    artist = get_artist(metadata)
-    title = get_title(metadata)
-    now_playing = artist.strip() + " - " + title.strip()
-
-    if is_playing():
-        color = "#00FF00"
+    if metadata.strip() == "Offline":
+        return create_result("Offline", "#FF0000")
     else:
-        color = "#FFFF00"
-
-    return {
-        'full_text': '♪: %s' % now_playing,
-        'name': 'spotify',
-        'color': color
-    }
+        artist = get_artist(metadata)
+        title = get_title(metadata)
+        now_playing = artist.strip() + " - " + title.strip()
+        color = "#00FF00" if is_playing() else "#FFFF00"
+        return create_result(now_playing, color)
 
 def print_line(message):
     """ Non-buffered printing to stdout. """
-    sys.stdout.write(message + '\n')
+    sys.stdout.write(message + "\n")
     sys.stdout.flush()
 
 def read_line():
@@ -68,15 +72,15 @@ def main():
     print_line(read_line())
 
     while True:
-        line, prefix = read_line(), ''
+        line, prefix = read_line(), ""
         # ignore comma at start of lines
-        if line.startswith(','):
-            line, prefix = line[1:], ','
+        if line.startswith(","):
+            line, prefix = line[1:], ","
 
         j = json.loads(line)
         j.insert(-1, get_spotify_status())
         # and echo back new encoded json
         print_line(prefix+json.dumps(j))
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

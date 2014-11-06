@@ -12,8 +12,7 @@ BASH_ENV=bashrc.sh\
 	bash_aliases.sh\
 	bash_utils.sh
 
-PY_SCRIPTS=change-volume.py\
-	i3-exit.py\
+PY_SCRIPTS=i3-exit.py\
 	i3status-wrapper.py\
 	spotify-control.py
 
