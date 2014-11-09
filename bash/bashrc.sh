@@ -1,7 +1,8 @@
 # install: ~/.bashrc
 # Paths
-IDEA_HOME=/opt/idea-IC-135.1230
-SCALA_HOME=/opt/scala-2.11.2
+IDEA_HOME=/opt/idea
+JAVA_HOME=/usr/bin/java
+SCALA_HOME=/opt/scala
 
 PATH=$PATH:$SCALA_HOME/bin:$IDEA_HOME/bin
 
@@ -16,11 +17,6 @@ fi
 # load utils
 if [ -f "$HOME/.bash_utils" ]; then
 . "$HOME/.bash_utils"
-fi
-
-# load user binaries to the path if they exist
-if [ -d "$HOME/bin" ]; then
-  PATH=$PATH:$HOME/bin
 fi
 
 # Bash completion
