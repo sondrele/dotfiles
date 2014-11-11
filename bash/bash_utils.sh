@@ -1,5 +1,9 @@
 # install: ~/.bash_utils
 
+function highlight {
+  egrep --color=always '$1|^'
+}
+
 # search for word in a PDF-file from a folder (defaulting to the current folder)
 # example: pdfs "hallo" ../
 function pdfs {
