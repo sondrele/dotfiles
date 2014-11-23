@@ -8,9 +8,11 @@ alias l="ls"
 alias ll="ls -hog"
 alias la="ls -A"
 # ls last file changed
-alias lf="/bin/ls -rt|tail -n1"
+alias lf="ls -rt | tail -n1"
 # sort by date
 alias lt="ls -lrt"
+# ls last downloaded
+alias ld="ls -lrt ~/Downloads | tail -n10"
 
 # grep
 alias grep="grep --color=auto"
