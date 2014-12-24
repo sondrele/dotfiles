@@ -21,7 +21,7 @@ order += "cpu_temperature 0"order += "volume master"
 order += "tztime local"
 
 ipv6 {
-  format_up = "IPv6"
+  format_up = "IPv6: %ip"
   format_down = "IPv6"
 }
 
@@ -32,7 +32,7 @@ wireless wlan0 {
 
 ethernet eth0 {
   # if you use %speed, i3status requires root privileges
-  format_up = "E: %speed"
+  format_up = "E: %ip (%speed)"
   format_down = "E: down"
 }
 
