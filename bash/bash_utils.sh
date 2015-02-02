@@ -1,5 +1,13 @@
 # install: ~/.bash_utils
 
+function gitclone {
+  if [ "$3" ]; then
+    git clone "https://github.com/$1/$2.git"
+  else
+    git clone "git@github.com:$1/$2.git"
+  fi
+}
+
 # search for word in a PDF-file from a folder (defaulting to the current folder)
 # example: pdfs "hallo" ../
 function pdfs {
