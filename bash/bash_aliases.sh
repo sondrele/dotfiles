@@ -19,6 +19,7 @@ alias grep="grep --color=auto"
 
 # make
 alias m="make SHELL=/bin/bash"
+alias make="make SHELL=/bin/bash"
 
 # utils
 alias go="gnome-open"
