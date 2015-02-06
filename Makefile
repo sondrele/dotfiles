@@ -58,13 +58,13 @@ diff_files = colordiff $(INSTALL_DIR)/$1 $(SRC_DIR)/$2 || \
 	echo -e "\e[0;31m$(INSTALL_DIR)/$1\e[0m and \e[34m$(SRC_DIR)/$2\e[0m differ"
 
 %.diff:
-	$(call diff_files,.$(@:.diff=),bash/$(@:.diff=.sh))
+	@$(call diff_files,.$(@:.diff=),bash/$(@:.diff=.sh))
 
 diff: $(BASH_ENV:.sh=.diff)
-	$(call diff_files,.i3/config,i3/config)
-	$(call diff_files,.config/i3status/config,i3status/config)
-	$(call diff_files,.config/dunst/dunstrc,dunst/dunstrc)
-	$(call diff_files,.gitconfig,git/gitconfig)
-	$(call diff_files,.config/sublime-text-3/Packages/User/Default\ \(Linux\).sublime-keymap,sublime/Default\ \(Linux\).sublime-keymap)
-	$(call diff_files,.config/sublime-text-3/Packages/User/Preferences.sublime-settings,sublime/Preferences.sublime-settings)
+	@$(call diff_files,.i3/config,i3/config)
+	@$(call diff_files,.config/i3status/config,i3status/config)
+	@$(call diff_files,.config/dunst/dunstrc,dunst/dunstrc)
+	@$(call diff_files,.gitconfig,git/gitconfig)
+	@$(call diff_files,.config/sublime-text-3/Packages/User/Default\ \(Linux\).sublime-keymap,sublime/Default\ \(Linux\).sublime-keymap)
+	@$(call diff_files,.config/sublime-text-3/Packages/User/Preferences.sublime-settings,sublime/Preferences.sublime-settings)
 	@echo "[Files diffed]"
