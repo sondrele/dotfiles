@@ -3,8 +3,10 @@
 IDEA_HOME=/opt/idea
 JAVA_HOME=/usr/bin/java
 SCALA_HOME=/opt/scala
+ARM_GCC_TOOLCHAIN=/home/sondre/opt/SimplicityStudio_v2/developer/toolchains/gnu_arm/4.8_2013q4/bin
+LD_LIBRARY_PATH=/usr/local/lib
 
-PATH=$PATH:$SCALA_HOME/bin:$IDEA_HOME/bin
+PATH=$PATH:$SCALA_HOME/bin:$IDEA_HOME/bin:$ARM_GCC_TOOLCHAIN
 
 # case insensitive autocomplete
 bind "set completion-ignore-case on"

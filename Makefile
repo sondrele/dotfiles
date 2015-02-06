@@ -16,7 +16,7 @@ PY_SCRIPTS=i3-exit.py\
 	i3status-wrapper.py\
 	spotify-control.py
 
-.PHONY: all directories bash i3configs i3scripts
+.PHONY: all diff directories bash i3configs i3scripts
 
 all: directories bash i3configs i3scripts gitconfig sublimeconfig
 	@echo "[Installed all in: $(INSTALL_DIR)]"
@@ -50,6 +50,21 @@ gitconfig:
 	@echo "[Configured git]"
 
 sublimeconfig:
-	cp $(SRC_DIR)/sublime/Default\ \(Linux\).sublime-keymap $(INSTALL_DIR)/.config/sublime-text-3/Packages/User/
-	cp $(SRC_DIR)/sublime/Preferences.sublime-settings $(INSTALL_DIR)/.config/sublime-text-3/Packages/User/
+	cp $(SRC_DIR)/sublime/Default\ \(Linux\).sublime-keymap $(INSTALL_DIR)/.config/sublime-text-3/Packages/User/Default\ \(Linux\).sublime-keymap
+	cp $(SRC_DIR)/sublime/Preferences.sublime-settings $(INSTALL_DIR)/.config/sublime-text-3/Packages/User/Preferences.sublime-settings
 	@echo "[Configured Sublime]"
+
+diff_files = colordiff $(INSTALL_DIR)/$1 $(SRC_DIR)/$2 || \
+	echo -e "\e[0;31m$(INSTALL_DIR)/$1\e[0m and \e[34m$(SRC_DIR)/$2\e[0m differ"
+
+%.diff:
+	$(call diff_files,.$(@:.diff=),bash/$(@:.diff=.sh))
+
+diff: $(BASH_ENV:.sh=.diff)
+	$(call diff_files,.i3/config,i3/config)
+	$(call diff_files,.config/i3status/config,i3status/config)
+	$(call diff_files,.config/dunst/dunstrc,dunst/dunstrc)
+	$(call diff_files,.gitconfig,git/gitconfig)
+	$(call diff_files,.config/sublime-text-3/Packages/User/Default\ \(Linux\).sublime-keymap,sublime/Default\ \(Linux\).sublime-keymap)
+	$(call diff_files,.config/sublime-text-3/Packages/User/Preferences.sublime-settings,sublime/Preferences.sublime-settings)
+	@echo "[Files diffed]"
