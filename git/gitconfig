@@ -7,6 +7,8 @@
   hist = log --all --color --pretty=format:\"%x1b[31m %h %x1b[0m%ad %x1b[32m|%d%x1b[0m%x20%s %x1b[34m[%an]\" --full-history --graph --date=short
 	type = cat-file -t
 	dump = cat-file -p
+	showstash = stash show -p stash@{0}
+	submodule-update = submodule update --init --recursive
 [user]
 	email = sondrele@stud.ntnu.no
 	name = Sondre Lefsaker
