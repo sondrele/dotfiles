@@ -11,7 +11,7 @@
     100
   ],
   "shift_tab_unindent": true,
-  "tab_size": 2,
+  "tab_size": 4,
   "theme": "Soda Dark 3.sublime-theme",
   "translate_tabs_to_spaces": true,
   "WrapPlus.break_on_hyphens": false

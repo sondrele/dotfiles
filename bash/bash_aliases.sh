@@ -34,3 +34,5 @@ alias gt="git checkout "
 
 alias got="git "
 alias gut="git "
+
+alias rustup="curl -s https://static.rust-lang.org/rustup.sh | sudo sh"
