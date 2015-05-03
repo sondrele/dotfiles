@@ -29,6 +29,11 @@ if [ -f "/etc/bash_completion" ]; then
 . "/etc/bash_completion"
 fi
 
+# Hub completion
+if [ -f "$HOME/opt/hub-linux/2.2.0/etc/hub.bash_completion.sh" ]; then
+. "$HOME/opt/hub-linux/2.2.0/etc/hub.bash_completion.sh"
+fi
+
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
   PATH=$PATH:$HOME/bin
