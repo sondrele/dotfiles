@@ -11,6 +11,9 @@ PATH=$PATH:$SCALA_HOME/bin:$IDEA_HOME/bin:$ARM_GCC_TOOLCHAIN
 # case insensitive autocomplete
 bind "set completion-ignore-case on"
 
+# set autocd
+shopt -s autocd
+
 # load aliases
 if [ -f "$HOME/.bash_aliases" ]; then
 . "$HOME/.bash_aliases"
@@ -33,4 +36,4 @@ fi
 
 # Show git repository in command prompt
 export GIT_PS1_SHOWDIRTYSTATE=1
-export PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\033[01;33m\]$(__git_ps1)\[\033[01;34m\] \$\[\033[00m\] '
+export PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\033[01;33m\]$(__git_ps1)\[\033[01;34m\] \n\$\[\033[00m\] '
