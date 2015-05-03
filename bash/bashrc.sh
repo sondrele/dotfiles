@@ -34,6 +34,11 @@ if [ -f "$HOME/opt/hub-linux/2.2.0/etc/hub.bash_completion.sh" ]; then
 . "$HOME/opt/hub-linux/2.2.0/etc/hub.bash_completion.sh"
 fi
 
+# cargo completion
+if [ -f "$HOME/.multirust/toolchains/nightly/etc/bash_completion.d/cargo" ]; then
+. "$HOME/.multirust/toolchains/nightly/etc/bash_completion.d/cargo"
+fi
+
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
   PATH=$PATH:$HOME/bin
