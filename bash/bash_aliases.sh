@@ -1,6 +1,13 @@
 # install: ~/.bash_aliases
 
-alias diff="colordiff"
+# set alias if command exists
+if_alias() {
+    if hash "$2" 2>/dev/null; then
+        alias "$1"="$2"
+    fi
+}
+
+if_alias diff colordiff
 
 # ls
 alias ls="ls --color=auto"
@@ -22,9 +29,10 @@ alias m="make SHELL=/bin/bash"
 alias make="make SHELL=/bin/bash"
 
 # utils
-alias go="gnome-open"
+if_alias go gnome-open
 
 # git
+if_alias hub git
 alias gs="git status "
 alias ga="git add "
 alias gb="git branch "
@@ -34,5 +42,3 @@ alias gt="git checkout "
 
 alias got="git "
 alias gut="git "
-
-alias rustup="curl -s https://static.rust-lang.org/rustup.sh | sudo sh"
