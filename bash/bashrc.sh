@@ -31,7 +31,7 @@ fi
 
 # Hub completion
 if [ -f "$HOME/opt/hub-linux/2.2.0/etc/hub.bash_completion.sh" ]; then
-. "$HOME/opt/hub-linux/2.2.0/etc/hub.bash_completion.sh"
+. "$HOME/opt/hub/etc/hub.bash_completion.sh"
 fi
 
 # cargo completion
