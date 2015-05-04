@@ -30,7 +30,7 @@ if [ -f "/etc/bash_completion" ]; then
 fi
 
 # Hub completion
-if [ -f "$HOME/opt/hub-linux/2.2.0/etc/hub.bash_completion.sh" ]; then
+if [ -f "$HOME/opt/hub/etc/hub.bash_completion.sh" ]; then
 . "$HOME/opt/hub/etc/hub.bash_completion.sh"
 fi
 
