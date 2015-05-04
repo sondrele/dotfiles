@@ -3,6 +3,15 @@
 set -e
 
 FLAG=$1
+echo "
+  Options (choose one):
+  -v      Verbose output (debug)
+  -u      Force update for apt-get repositories
+
+  Executing with: $FLAG
+
+"
+
 if [ "$FLAG" = "-v" ]; then
     set -x
 fi
@@ -37,9 +46,6 @@ spotify
 subl
 "
 
-LOG="packages.log"
-ERROR="packages_error.log"
-
 # Ensure that ~/opt and ~/bin exists
 mkdir -p $HOME/opt/hub
 mkdir -p $HOME/bin
@@ -58,13 +64,13 @@ is_installed() {
 
 update() {
     echo "  updating..."
-    apt-get update $1 >> $LOG 2>> $ERROR
+    apt-get update $1
 }
 
 install() {
     if ! is_installed $1; then
         echo  "  installling: '$1'"
-        apt-get install -y $1 >> $LOG 2>> $ERROR
+        apt-get install -y $1
     fi
 }
 
@@ -140,13 +146,6 @@ install_packages() {
     done
 }
 
-# Move into temporary directory and make hell
-EXEC_DIR=$(pwd)
-
-mkdir -p tmp
-cd tmp
-
-# Start installing
 run() {
     report_uninstalled $PACKAGES
     report_uninstalled $OTHER
@@ -163,7 +162,16 @@ run() {
     install_j4_dmenu_desktop
     install_hub
 }
+
+# Move into 'tmp' and make hell...
+EXEC_DIR=$(pwd)
+mkdir -p tmp
+cd tmp
+
+# Start installing and report exit code
+run
 echo "Exit code: $?"
 
+# Cleanup 'tmp'
 cd $EXEC_DIR
 rm -rf tmp
