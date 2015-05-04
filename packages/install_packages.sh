@@ -13,6 +13,7 @@ if [ $(id -u) -ne 0 ]; then
 fi
 
 PACKAGES="
+clang
 cmake
 dropbox
 dunst
@@ -23,7 +24,6 @@ i3
 i3lock
 i3status
 nm-applet
-sublime-text
 redshift
 unp
 vim
@@ -34,6 +34,7 @@ blueman-applet
 firefox
 j4-dmenu-desktop
 spotify
+subl
 "
 
 LOG="packages.log"
@@ -116,6 +117,16 @@ install_hub() {
     cp $HOME/opt/hub/hub $HOME/bin
 }
 
+# $1: command
+# $2: actual package
+install_custom() {
+    if is_installed "$1"; then
+        return 0
+    fi
+
+    install "$2"
+}
+
 # Install
 report_uninstalled() {
     for package in $1
@@ -134,13 +145,22 @@ install_packages() {
 }
 
 # Start installing
-report_uninstalled $PACKAGES
-report_uninstalled $OTHER
+run() {
+    report_uninstalled $PACKAGES
+    report_uninstalled $OTHER
 
-update
-install_packages $PACKAGES
+    if [ "$FLAG" = "-u" ]; then
+        update
+    fi
 
-# Custom install
-install_spotify
-install_j4_dmenu_desktop
-install_hub
+    install_packages $PACKAGES
+
+    # Custom install
+    install_custom subl sublime-text
+    install_spotify
+    install_j4_dmenu_desktop
+    install_hub
+}
+
+run
+echo "Exit code: $?"
