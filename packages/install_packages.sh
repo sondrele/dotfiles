@@ -2,6 +2,11 @@
 
 set -e
 
+if [ $(id -u) -ne 0 ]; then
+    echo "Please run as root"
+    exit 1
+fi
+
 FLAG=$1
 echo "
   Options (choose one):
@@ -14,11 +19,6 @@ echo "
 
 if [ "$FLAG" = "-v" ]; then
     set -x
-fi
-
-if [ $(id -u) -ne 0 ]; then
-    echo "Please run as root"
-    exit 1
 fi
 
 PACKAGES="
@@ -169,8 +169,9 @@ mkdir -p tmp
 cd tmp
 
 # Start installing and report exit code
+echo "  Running..."
 run
-echo "Exit code: $?"
+echo "  Exit code: $?"
 
 # Cleanup 'tmp'
 cd $EXEC_DIR
