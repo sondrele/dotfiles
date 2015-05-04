@@ -25,6 +25,7 @@ nm-applet
 subl
 redshift
 unp
+vim
 "
 
 OTHER="
