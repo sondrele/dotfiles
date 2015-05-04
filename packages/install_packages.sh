@@ -67,7 +67,7 @@ update() {
 install() {
     if ! is_installed $1; then
         echo  "  installling: '$1'"
-        apt-get install $1 >> $LOG 2>> $ERROR
+        apt-get install -y $1 >> $LOG 2>> $ERROR
     fi
 }
 
