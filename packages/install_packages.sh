@@ -40,10 +40,6 @@ subl
 LOG="packages.log"
 ERROR="packages_error.log"
 
-# Move into temporary directory and make hell
-mkdir -p tmp
-cd tmp
-
 # Ensure that ~/opt and ~/bin exists
 mkdir -p $HOME/opt/hub
 mkdir -p $HOME/bin
@@ -144,6 +140,12 @@ install_packages() {
     done
 }
 
+# Move into temporary directory and make hell
+EXEC_DIR=$(pwd)
+
+mkdir -p tmp
+cd tmp
+
 # Start installing
 run() {
     report_uninstalled $PACKAGES
@@ -161,6 +163,7 @@ run() {
     install_j4_dmenu_desktop
     install_hub
 }
-
-run
 echo "Exit code: $?"
+
+cd $EXEC_DIR
+rm -rf tmp
