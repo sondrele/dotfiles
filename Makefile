@@ -18,7 +18,7 @@ PY_SCRIPTS=i3-exit.py\
 
 .PHONY: all diff directories bash i3configs i3scripts
 
-all: directories bash i3configs i3scripts gitconfig sublimeconfig
+all: directories bash i3configs i3scripts gitconfig sublimeconfig install-packages
 	@echo "[Installed all in: $(INSTALL_DIR)]"
 
 directories: $(DIRS)
@@ -53,6 +53,9 @@ sublimeconfig:
 	cp $(SRC_DIR)/sublime/Default\ \(Linux\).sublime-keymap $(INSTALL_DIR)/.config/sublime-text-3/Packages/User/Default\ \(Linux\).sublime-keymap
 	cp $(SRC_DIR)/sublime/Preferences.sublime-settings $(INSTALL_DIR)/.config/sublime-text-3/Packages/User/Preferences.sublime-settings
 	@echo "[Configured Sublime]"
+
+install-packages:
+	sh ./packages/install_packages.sh
 
 diff_files = colordiff $(INSTALL_DIR)/$1 $(SRC_DIR)/$2 || \
 	echo -e "\e[0;31m$(INSTALL_DIR)/$1\e[0m and \e[34m$(SRC_DIR)/$2\e[0m differ"

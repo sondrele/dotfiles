@@ -59,7 +59,7 @@ is_installed() {
 
 update() {
     echo "  updating..."
-    #apt-get update -qq 2>> $ERROR
+    apt-get update -qq 2>> $ERROR
 }
 
 install() {
