@@ -2,7 +2,8 @@
 
 set -e
 
-if [ $1 = "-v" ]; then
+FLAG=$1
+if [ "$FLAG" = "-v" ]; then
     set -x
 fi
 
@@ -22,7 +23,7 @@ i3
 i3lock
 i3status
 nm-applet
-subl
+sublime-text
 redshift
 unp
 vim
@@ -60,13 +61,13 @@ is_installed() {
 
 update() {
     echo "  updating..."
-    apt-get update -qq 2>> $ERROR
+    apt-get update $1 >> $LOG 2>> $ERROR
 }
 
 install() {
     if ! is_installed $1; then
         echo  "  installling: '$1'"
-        apt-get install -qq --print-uris $1 >> $LOG 2>>$ERROR
+        apt-get install $1 >> $LOG 2>> $ERROR
     fi
 }
 
