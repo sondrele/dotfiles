@@ -24,6 +24,7 @@ fi
 PACKAGES="
 clang
 cmake
+curl
 dropbox
 dunst
 feh
