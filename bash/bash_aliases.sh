@@ -1,5 +1,8 @@
 # install: ~/.bash_aliases
 
+# Add to PATH if not present already
+PATH=$PATH:$HOME/bin
+
 # set alias if command exists
 if_alias() {
     if hash "$2" 2>/dev/null; then
@@ -32,7 +35,7 @@ alias make="make SHELL=/bin/bash"
 if_alias go gnome-open
 
 # git
-if_alias hub git
+if_alias git hub
 alias gs="git status "
 alias ga="git add "
 alias gb="git branch "
