@@ -41,6 +41,7 @@ vim
 
 OTHER="
 blueman-applet
+dmenu
 firefox
 j4-dmenu-desktop
 spotify
@@ -159,6 +160,7 @@ run() {
 
     # Custom install
     install_custom subl sublime-text
+    install_custom demnu suckless-tools
     install_spotify
     install_j4_dmenu_desktop
     install_hub
