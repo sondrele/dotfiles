@@ -8,6 +8,9 @@ LD_LIBRARY_PATH=/usr/local/lib
 
 PATH=$PATH:$SCALA_HOME/bin:$IDEA_HOME/bin:$ARM_GCC_TOOLCHAIN
 
+# enable vi mode
+set -o vi
+
 # case insensitive autocomplete
 bind "set completion-ignore-case on"
 
