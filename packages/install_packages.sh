@@ -85,7 +85,7 @@ install_spotify() {
     echo "  Installing: 'spotify'"
 
     # 1. Add spotify
-    echo "deb http://repository.spotify.com stable non-free" | tee -a /etc/apt/sources.list.d/spotify.list
+    echo "deb http://repository.spotify.com testing non-free" | tee -a /etc/apt/sources.list.d/spotify.list
 
     # 2. Add public key
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 94558F59
