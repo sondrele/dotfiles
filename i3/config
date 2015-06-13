@@ -6,7 +6,7 @@ set $mod Mod4
 
 # Section: Startup programs
 exec --no-startup-id redshift -l 63:10
-exec --no-startup-id feh --bg-fill /usr/share/backgrounds/linuxmint-qiana/simon__syon_8740855060.jpg
+exec --no-startup-id feh --bg-center /home/sondre/Pictures/us_keyboard.png
 exec --no-startup-id nm-applet
 exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id blueman-applet
@@ -88,6 +88,10 @@ bindsym $mod+a focus parent
 
 # focus the child container
 bindsym $mod+d focus child
+
+# keyboard layout toggle
+bindsym $mod+control+1 exec setxkbmap us -option "caps:escape" # set US kblayout
+bindsym $mod+control+2 exec setxkbmap no -option "caps:escape" # set norwegian kblayout
 
 # Screen lock and exit
 bindsym control+Mod1+l exec i3lock -c 000000
