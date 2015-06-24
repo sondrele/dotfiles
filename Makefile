@@ -21,6 +21,8 @@ PY_SCRIPTS=i3-exit.py\
 all: directories bash i3configs i3scripts gitconfig sublimeconfig
 	@echo "[Installed all in: $(INSTALL_DIR)]"
 
+install: directories bash install-packages i3configs i3scripts gitconfig sublimeconfig
+
 directories: $(DIRS)
 
 $(DIRS):
@@ -51,6 +53,9 @@ gitconfig:
 
 sublimeconfig:
 	cp $(SRC_DIR)/sublime/Default\ \(Linux\).sublime-keymap $(INSTALL_DIR)/.config/sublime-text-3/Packages/User/Default\ \(Linux\).sublime-keymap
+	cp $(SRC_DIR)/sublime/Package Control.sublime-settings $(INSTALL_DIR)/.config/sublime-text-3/Packages/User/Package Control.sublime-settings
+	cp $(SRC_DIR)/sublime/resize_active_group.sublime-settings $(INSTALL_DIR)/.config/sublime-text-3/Packages/User/resize_active_group.sublime-settings
+	cp $(SRC_DIR)/sublime/trailing_spaces.sublime-settings $(INSTALL_DIR)/.config/sublime-text-3/Packages/User/trailing_spaces.sublime-settings
 	cp $(SRC_DIR)/sublime/Preferences.sublime-settings $(INSTALL_DIR)/.config/sublime-text-3/Packages/User/Preferences.sublime-settings
 	@echo "[Configured Sublime]"
 
