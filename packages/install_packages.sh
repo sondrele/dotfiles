@@ -2,11 +2,6 @@
 
 set -e
 
-if [ $(id -u) -ne 0 ]; then
-    echo "Please run as root"
-    exit 1
-fi
-
 FLAG=$1
 echo "
   Options (choose one):
@@ -66,13 +61,13 @@ is_installed() {
 
 update() {
     echo "  updating..."
-    apt-get update $1
+    sudo apt-get update $1
 }
 
 install() {
     if ! is_installed $1; then
         echo  "  installling: '$1'"
-        apt-get install -y $1
+        sudo apt-get install -y $1
     fi
 }
 
@@ -121,6 +116,12 @@ install_hub() {
     cp $HOME/opt/hub/hub $HOME/bin
 }
 
+install_sublime() {
+    sudo apt-get install sublime-text
+    # Install package control
+    wget -O "$HOME/.config/sublime-text-3/Installed Packages/Package Control.sublime-package" "https://packagecontrol.io/Package%20Control.sublime-package"
+}
+
 # $1: command
 # $2: actual package
 install_custom() {
@@ -159,8 +160,8 @@ run() {
     install_packages $PACKAGES
 
     # Custom install
-    install_custom subl sublime-text
     install_custom demnu suckless-tools
+    install_sublime
     install_spotify
     install_j4_dmenu_desktop
     install_hub
