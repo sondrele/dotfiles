@@ -92,7 +92,7 @@ bindsym $mod+control+2 exec setxkbmap no -option "caps:escape" # set norwegian k
 
 # Screen lock and exit
 bindsym control+Mod1+l exec i3lock -c 000000
-bindsym $mod+x         exec ~/.i3/i3-exit.py
+bindsym $mod+x exec ~/bin/i3-exit
 for_window [class="I3-exit" instance="i3-exit"] floating enable
 
 # switch to workspace
