@@ -6,8 +6,11 @@ set -e
 
 cd "$(dirname $0)"/..
 
+# export source dotfiles directory to installers
 export SRC_DIR=$(pwd)
 
+# export the root destination directory to installers
+# the installation process can be previewed with 'test'
 if [ "$1" = "test" ]; then
     mkdir -p "$SRC_DIR/test"
     export INSTALL_DIR="$SRC_DIR/test"
