@@ -1,13 +1,16 @@
 
-.PHONY: install install-packages install-all
+.PHONY: install install-packages install-all diff test
 
 install:
-	@sh ./install/install
+	@./scripts/install
 
 install-packages:
-	@sh ./install/install_packages -u
+	@./scripts/install_packages -u
 
 install-all: install-packages install
 
+diff:
+	@./scripts/diff
+
 test:
-	@sh ./install/install test && tree -a test/ && rm -rf test/
+	@./scripts/install test && tree -a test/ && rm -rf test/
