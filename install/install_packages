@@ -19,6 +19,7 @@ fi
 PACKAGES="
 clang
 cmake
+colordiff
 curl
 dropbox
 dunst
@@ -30,6 +31,7 @@ i3lock
 i3status
 nm-applet
 redshift
+tree
 unp
 vim
 "

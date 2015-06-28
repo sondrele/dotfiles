@@ -1,0 +1,19 @@
+#!/bin/bash
+#
+# Run all dotfiles installers.
+
+set -e
+
+cd "$(dirname $0)"/..
+
+export SRC_DIR=$(pwd)
+
+if [ "$1" = "test" ]; then
+    mkdir -p "$SRC_DIR/test"
+    export INSTALL_DIR="$SRC_DIR/test"
+else
+    export INSTALL_DIR=$HOME
+fi
+
+# find the installers and run them iteratively
+find . -name install.sh | while read installer ; do sh -c "$installer" ; done
