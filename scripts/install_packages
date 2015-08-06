@@ -70,7 +70,7 @@ update() {
 install() {
     if ! is_installed $1; then
         echo  "  installling: '$1'"
-        sudo apt-get install -y $1
+        sudo apt-get install -y --force-yes $1
     fi
 }
 
@@ -83,10 +83,10 @@ install_spotify() {
     echo "  Installing: 'spotify'"
 
     # 1. Add spotify
-    echo "deb http://repository.spotify.com testing non-free" | tee -a /etc/apt/sources.list.d/spotify.list
+    echo "deb http://repository.spotify.com testing non-free" | sudo tee -a /etc/apt/sources.list.d/spotify.list
 
     # 2. Add public key
-    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 94558F59
+    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 94558F59
 
     # 3. Run apt-get update
     update
@@ -105,7 +105,7 @@ install_j4_dmenu_desktop() {
     cd j4-dmenu-desktop
     cmake .
     make
-    make install
+    sudo make install
 }
 
 install_hub() {
@@ -123,7 +123,7 @@ install_sublime() {
     sudo apt-get install sublime-text
     # Install package control
     INSTALL_DIR="$HOME/.config/sublime-text-3/Installed Packages"
-    mkdir -p $INSTALL_DIR
+    mkdir -p "$INSTALL_DIR"
     wget -O "$INSTALL_DIR/Package Control.sublime-package" "https://packagecontrol.io/Package%20Control.sublime-package"
 }
 
