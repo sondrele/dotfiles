@@ -122,7 +122,9 @@ install_hub() {
 install_sublime() {
     sudo apt-get install sublime-text
     # Install package control
-    wget -O "$HOME/.config/sublime-text-3/Installed Packages/Package Control.sublime-package" "https://packagecontrol.io/Package%20Control.sublime-package"
+    INSTALL_DIR="$HOME/.config/sublime-text-3/Installed Packages"
+    mkdir -p $INSTALL_DIR
+    wget -O "$INSTALL_DIR/Package Control.sublime-package" "https://packagecontrol.io/Package%20Control.sublime-package"
 }
 
 # $1: command
