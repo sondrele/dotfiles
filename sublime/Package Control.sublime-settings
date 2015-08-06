@@ -1,19 +1,27 @@
 {
+	"in_process_packages":
+	[
+	],
 	"installed_packages":
 	[
 		"AAAPackageDev",
+		"Anaconda",
+		"Djaneiro",
 		"EasyMotion",
 		"GitGutter",
 		"Increment Selection",
+		"LESS",
 		"Makefile Improved",
 		"Markdown Preview",
 		"Monokai Extended",
 		"MoveTab",
+		"nginx",
 		"Package Control",
+		"Pretty JSON",
 		"Resize Group with Keyboard",
 		"Rust",
+		"Sass",
 		"SideBarEnhancements",
-		"SyncedSideBar",
 		"Theme - Soda",
 		"TrailingSpaces",
 		"Wrap Plus"

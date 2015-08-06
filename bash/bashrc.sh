@@ -42,6 +42,11 @@ if [ -f "$HOME/.multirust/toolchains/nightly/etc/bash_completion.d/cargo" ]; the
 . "$HOME/.multirust/toolchains/nightly/etc/bash_completion.d/cargo"
 fi
 
+# django completion
+if [ -f "$HOME/.django/django_bash_autocompletion" ]; then
+. "$HOME/.django/django_bash_autocompletion"
+fi
+
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
   PATH=$PATH:$HOME/bin
@@ -50,3 +55,4 @@ fi
 # Show git repository in command prompt
 export GIT_PS1_SHOWDIRTYSTATE=1
 export PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\033[01;33m\]$(__git_ps1)\[\033[01;34m\] \n\$\[\033[00m\] '
+
