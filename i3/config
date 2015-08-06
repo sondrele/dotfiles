@@ -170,7 +170,29 @@ force_display_urgency_hint 500 ms
 
 # Start i3bar for all displays to display a workspace bar
 bar {
-  # laptop display
+  # E7450 display
+  output eDP1
+
+  # show tray icons on this monitor if it exists
+  tray_output eDP1
+
+  # use i3status
+  status_command i3status --config ~/.i3/i3status.conf
+
+  colors {
+    background #232323
+    statusline #dcdcdc
+
+    # Same color scheme as the windows
+    focused_workspace  #325bd6 #003757 #ccd6f4
+    active_workspace   #333333 #5F676A #ffffff
+    inactive_workspace #333333 #424242 #888888
+    urgent_workspace   #C10004 #900000 #ffffff
+  }
+}
+
+bar {
+  # E6420 standard monitor
   output VGA2
 
   # show tray icons on this monitor if it exists
@@ -192,7 +214,7 @@ bar {
 }
 
 bar {
-  # laptop display
+  # E6420 display
   output LVDS2
 
   # show tray icons on the primary monitor
