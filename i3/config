@@ -7,6 +7,7 @@ set $mod Mod4
 # Section: Startup programs
 exec --no-startup-id redshift -l 63:10
 exec --no-startup-id feh --bg-center /usr/share/backgrounds/linuxmint-rafaela/rapciu_baltic.png
+exec --no-startup-id xautolock -time 15 -locker ~/bin/fuzzy-i3lock
 exec --no-startup-id nm-applet
 exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id blueman-applet
@@ -95,7 +96,7 @@ bindsym $mod+control+1 exec setxkbmap us -option "caps:escape" # set US kblayout
 bindsym $mod+control+2 exec setxkbmap no -option "caps:escape" # set norwegian kblayout
 
 # Screen lock and exit
-bindsym control+Mod1+l exec i3lock -c 000000
+bindsym control+Mod1+l exec ~/bin/fuzzy-i3lock
 bindsym $mod+x exec ~/bin/i3-exit
 for_window [class="I3-exit" instance="i3-exit"] floating enable
 

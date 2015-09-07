@@ -33,9 +33,11 @@ i3lock
 i3status
 nm-applet
 redshift
+scrot
 tree
 unp
 vim
+xautolock
 "
 
 OTHER="
