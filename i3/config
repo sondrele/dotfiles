@@ -5,7 +5,7 @@
 set $mod Mod4
 
 # Section: Startup programs
-exec --no-startup-id redshift -l 63:10
+exec --no-startup-id redshift -l 59.95:10.75
 exec --no-startup-id feh --bg-center /usr/share/backgrounds/linuxmint-rafaela/rapciu_baltic.png
 exec --no-startup-id xautolock -time 15 -locker ~/bin/fuzzy-i3lock
 exec --no-startup-id nm-applet
