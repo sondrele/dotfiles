@@ -6,7 +6,7 @@ set $mod Mod4
 
 # Section: Startup programs
 exec --no-startup-id redshift -l 63:10
-exec --no-startup-id feh --bg-center /home/sondre/Pictures/us_keyboard.png
+exec --no-startup-id feh --bg-center /usr/share/backgrounds/linuxmint-rafaela/rapciu_baltic.png
 exec --no-startup-id nm-applet
 exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id blueman-applet
