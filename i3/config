@@ -22,6 +22,7 @@ for_window [class="Gcalctool"] floating enable
 #for_window [class="Xfce4-notifyd"] floating enable
 for_window [class="File-roller"] floating enable
 
+
 # Section: Program shortcuts
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+n      exec firefox
@@ -29,13 +30,28 @@ bindsym $mod+n      exec firefox
 bindsym $mod+p      exec j4-dmenu-desktop
 bindsym $mod+o      exec subl
 
+# keyboard layout toggle
+bindsym $mod+control+1 exec setxkbmap us -option "caps:escape" # set US kblayout
+bindsym $mod+control+2 exec setxkbmap no -option "caps:escape" # set norwegian kblayout
+
+# Screen lock and exit
+bindsym control+Mod1+l exec ~/bin/fuzzy-i3lock
+bindsym $mod+x exec ~/bin/i3-exit
+for_window [class="I3-exit" instance="i3-exit"] floating enable
+
+# Control spotify
+bindsym $mod+Control+Left  exec ~/bin/spotify-control prev
+bindsym $mod+Control+Right exec ~/bin/spotify-control next
+bindsym $mod+Control+Down  exec ~/bin/spotify-control playpause
+
 # Script for changing volume
 bindsym Mod1+k exec amixer -D pulse sset Master 5%+
 bindsym Mod1+Shift+k exec amixer -D pulse sset Master 1%+
 bindsym Mod1+j exec amixer -D pulse sset Master 5%-
 bindsym Mod1+Shift+j exec amixer -D pulse sset Master 1%-
 
-# Section: Window managing
+
+# Section: Window management
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -91,15 +107,6 @@ bindsym $mod+a focus parent
 # focus the child container
 bindsym $mod+d focus child
 
-# keyboard layout toggle
-bindsym $mod+control+1 exec setxkbmap us -option "caps:escape" # set US kblayout
-bindsym $mod+control+2 exec setxkbmap no -option "caps:escape" # set norwegian kblayout
-
-# Screen lock and exit
-bindsym control+Mod1+l exec ~/bin/fuzzy-i3lock
-bindsym $mod+x exec ~/bin/i3-exit
-for_window [class="I3-exit" instance="i3-exit"] floating enable
-
 # switch to workspace
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
@@ -132,6 +139,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+p exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
 
 # Section: Resizing and moving
 mode "resize" {
@@ -176,6 +184,28 @@ bar {
 
   # show tray icons on this monitor if it exists
   tray_output eDP1
+
+  # use i3status
+  status_command i3status --config ~/.i3/i3status.conf
+
+  colors {
+    background #232323
+    statusline #dcdcdc
+
+    # Same color scheme as the windows
+    focused_workspace  #325bd6 #003757 #ccd6f4
+    active_workspace   #333333 #5F676A #ffffff
+    inactive_workspace #333333 #424242 #888888
+    urgent_workspace   #C10004 #900000 #ffffff
+  }
+}
+
+bar {
+  # E6420 standard monitor
+  output DP1
+
+  # show tray icons on this monitor if it exists
+  tray_output DP1
 
   # use i3status
   status_command i3status --config ~/.i3/i3status.conf
