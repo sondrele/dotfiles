@@ -28,7 +28,6 @@ git
 git-extras
 gnome-control-center
 gnome-settings-daemon
-i3
 i3lock
 i3status
 nm-applet
@@ -85,17 +84,17 @@ install_spotify() {
     fi
     echo "  Installing: 'spotify'"
 
-    # 1. Add spotify
-    echo "deb http://repository.spotify.com testing non-free" | sudo tee -a /etc/apt/sources.list.d/spotify.list
+    # 1. Add the Spotify repository signing key to be able to verify downloaded packages
+    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D2C19886
 
-    # 2. Add public key
-    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 94558F59
+    # 2. Add the Spotify repository
+    echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
 
-    # 3. Run apt-get update
+    # 3. Update list of available packages
     update
 
-    # 4. Install spotify
-    install spotify-client
+    # 4. Install Spotify
+    sudo apt-get install spotify-client
 }
 
 install_j4_dmenu_desktop() {
@@ -140,6 +139,17 @@ install_custom() {
     install "$2"
 }
 
+install_i3() {
+    if is_installed i3; then
+        return 0
+    fi
+
+    echo "deb http://debian.sur5r.net/i3/ $(lsb_release -c -s) universe" | sudo tee -a /etc/apt/sources.list.d/i3.list
+    sudo apt-get --allow-unauthenticated install sur5r-keyring
+    update
+    install i3
+}
+
 # Install
 report_uninstalled() {
     for package in $1
@@ -168,6 +178,7 @@ run() {
     install_packages $PACKAGES
 
     # Custom install
+    install_i3
     install_custom demnu suckless-tools
     install_sublime
     install_spotify
