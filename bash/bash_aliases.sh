@@ -45,5 +45,3 @@ alias gt="git checkout "
 
 alias got="git "
 alias gut="git "
-
-alias slack="scudcloud"

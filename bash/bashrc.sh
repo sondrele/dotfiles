@@ -1,12 +1,14 @@
 # install: ~/.bashrc
+
 # Paths
 IDEA_HOME=/opt/idea
 JAVA_HOME=/usr/bin/java
 SCALA_HOME=/opt/scala
-ARM_GCC_TOOLCHAIN=/home/sondre/opt/SimplicityStudio_v2/developer/toolchains/gnu_arm/4.8_2013q4/bin
+
+# Used with Rust
 LD_LIBRARY_PATH=/usr/local/lib
 
-PATH=$PATH:$SCALA_HOME/bin:$IDEA_HOME/bin:$ARM_GCC_TOOLCHAIN
+PATH=$PATH:$SCALA_HOME/bin:$IDEA_HOME/bin
 
 # enable vi mode
 set -o vi
@@ -56,3 +58,5 @@ fi
 export GIT_PS1_SHOWDIRTYSTATE=1
 export PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\033[01;33m\]$(__git_ps1)\[\033[01;34m\] \n\$\[\033[00m\] '
 
+export NVM_DIR="/home/sondre/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
