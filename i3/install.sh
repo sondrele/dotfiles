@@ -7,3 +7,4 @@ mkdir -p $DIR
 ln -sf "$SRC_DIR/i3/config" "$DIR/config"
 ln -sf "$SRC_DIR/i3/i3status.conf" "$DIR/i3status.conf"
 ln -sf "$SRC_DIR/i3/i3status-small.conf" "$DIR/i3status-small.conf"
+ln -sf "$SRC_DIR/i3/workspace-wwww.json" "$DIR/i3/workspace-wwww.json"
