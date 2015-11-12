@@ -54,39 +54,22 @@ bind "set completion-ignore-case on"
 shopt -s autocd
 
 # load aliases
-if [ -f "$HOME/.bash_aliases" ]; then
-. "$HOME/.bash_aliases"
-fi
+[ -s "$HOME/.bash_aliases" ] && . "$HOME/.bash_aliases"
 
 # load utils
-if [ -f "$HOME/.bash_utils" ]; then
-. "$HOME/.bash_utils"
-fi
+[ -s "$HOME/.bash_utils" ] && . "$HOME/.bash_utils"
 
 # Bash completion
-if [ -f "/etc/bash_completion" ]; then
-. "/etc/bash_completion"
-fi
-
-# Hub completion
-if [ -f "$HOME/opt/hub/etc/hub.bash_completion.sh" ]; then
-. "$HOME/opt/hub/etc/hub.bash_completion.sh"
-fi
+[ -s "/etc/bash_completion" ] && . "/etc/bash_completion"
 
 # cargo completion
-if [ -f "$HOME/.multirust/toolchains/nightly/etc/bash_completion.d/cargo" ]; then
-. "$HOME/.multirust/toolchains/nightly/etc/bash_completion.d/cargo"
-fi
+[ -s "$HOME/.multirust/toolchains/nightly/etc/bash_completion.d/cargo" ] && . "$HOME/.multirust/toolchains/nightly/etc/bash_completion.d/cargo"
 
 # django completion
-if [ -f "$HOME/.django/django_bash_autocompletion" ]; then
-. "$HOME/.django/django_bash_autocompletion"
-fi
+[ -s "$HOME/.django/django_bash_autocompletion" ] && . "$HOME/.django/django_bash_autocompletion"
 
 # set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-  PATH=$PATH:$HOME/bin
-fi
+[ -d "$HOME/bin" ] && PATH=$PATH:$HOME/bin
 
 export NVM_DIR="/home/sondre/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
