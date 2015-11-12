@@ -41,6 +41,7 @@ xautolock
 "
 
 OTHER="
+i3
 blueman-applet
 dmenu
 firefox
@@ -145,7 +146,7 @@ install_i3() {
         return 0
     fi
 
-    echo "deb http://debian.sur5r.net/i3/ $(lsb_release -c -s) universe" | sudo tee -a /etc/apt/sources.list.d/i3.list
+    echo "deb http://debian.sur5r.net/i3/ maya universe" | sudo tee -a /etc/apt/sources.list.d/i3-wm.list
     sudo apt-get --allow-unauthenticated install sur5r-keyring
     update
     install i3
