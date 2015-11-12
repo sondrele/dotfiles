@@ -44,6 +44,8 @@ bindsym $mod+n      exec firefox
 bindsym $mod+p      exec j4-dmenu-desktop
 bindsym $mod+o      exec subl
 
+bindsym $mod+t      exec "~/bin/terminal-layout 3"
+
 # keyboard layout toggle
 bindsym $mod+control+1 exec setxkbmap us -option "caps:escape" # set US kblayout
 bindsym $mod+control+2 exec setxkbmap no -option "caps:escape" # set norwegian kblayout
