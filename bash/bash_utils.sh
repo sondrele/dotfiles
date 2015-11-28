@@ -1,10 +1,15 @@
 # install: ~/.bash_utils
 
-function gitclone {
-  if [ "$3" ]; then
-    git clone "https://github.com/$1/$2.git"
+# function to copy the last downloaded contents to a given directory
+function cp-download {
+  DEST=$1
+  NUM=$2
+  if [[ $# -eq 2 ]]; then
+    ls -lrt "$HOME/Downloads/" | tail -n $NUM | awk '{print $NF }' | xargs -I{} cp "$HOME/Downloads/{}" $DEST
+  elif [[ $# -eq 1 ]]; then
+    ls -lrt "$HOME/Downloads/" | tail -n 1 | awk '{print $NF }' | xargs -I{} cp "$HOME/Downloads/{}" $DEST
   else
-    git clone "git@github.com:$1/$2.git"
+    ls -lrt "$HOME/Downloads/" | tail -n 1 | awk '{print $NF }' | xargs -I{} cp "$HOME/Downloads/{}" .
   fi
 }
 
