@@ -104,4 +104,4 @@ function __info {
   [ "$full" != "" ] && echo "[$full]"
 }
 
-PS1="┌─\$(__info)──(${bldblu}\w${txtrst})\n└─> "
+PS1="┌─\$(__info)─(${bldblu}\w${txtrst}) - ${txtpur}\u@\h${txtrst}\n└─> "
