@@ -5,7 +5,6 @@
 	],
 	"installed_packages":
 	[
-		"AAAPackageDev",
 		"Anaconda",
 		"Babel",
 		"Djaneiro",
@@ -19,11 +18,15 @@
 		"MoveTab",
 		"nginx",
 		"Package Control",
+		"PackageDev",
 		"Pretty JSON",
+		"React ES6 Snippets",
 		"Resize Group with Keyboard",
 		"Rust",
 		"Sass",
 		"SideBarEnhancements",
+		"SublimeLinter",
+		"SublimeLinter-contrib-eslint",
 		"Theme - Soda",
 		"TrailingSpaces",
 		"Wrap Plus"
