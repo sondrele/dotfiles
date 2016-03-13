@@ -2,11 +2,12 @@
 
 # based on cb-exit used in CrunchBang Linux <http://crunchbanglinux.org/>
 
-import pygtk
-pygtk.require('2.0')
 import gtk
 import os
 import getpass
+import pygtk
+pygtk.require('2.0')
+
 
 class i3_exit:
     def disable_buttons(self):
@@ -16,16 +17,16 @@ class i3_exit:
         self.reboot.set_sensitive(False)
         self.shutdown.set_sensitive(False)
 
-    def cancel_action(self,btn):
+    def cancel_action(self, btn):
         self.disable_buttons()
         gtk.main_quit()
 
-    def logout_action(self,btn):
+    def logout_action(self, btn):
         self.disable_buttons()
         self.status.set_label("Exiting i3, please standby...")
         os.system("i3-msg exit")
 
-    def suspend_action(self,btn):
+    def suspend_action(self, btn):
         self.disable_buttons()
         self.status.set_label("Suspending, please standby...")
         os.system("~/bin/fuzzy-i3lock")
@@ -35,7 +36,7 @@ class i3_exit:
                 org.freedesktop.UPower.Suspend")
         gtk.main_quit()
 
-    def reboot_action(self,btn):
+    def reboot_action(self, btn):
         self.disable_buttons()
         self.status.set_label("Rebooting, please standby...")
         os.system("dbus-send --system --print-reply   \
@@ -43,7 +44,7 @@ class i3_exit:
                 /org/freedesktop/ConsoleKit/Manager   \
                 org.freedesktop.ConsoleKit.Manager.Restart")
 
-    def shutdown_action(self,btn):
+    def shutdown_action(self, btn):
         self.disable_buttons()
         self.status.set_label("Shutting down, please standby...")
         os.system("dbus-send --system --print-reply   \
@@ -65,54 +66,53 @@ class i3_exit:
         windowicon = self.window.render_icon(gtk.STOCK_QUIT, gtk.ICON_SIZE_MENU)
         self.window.set_icon(windowicon)
 
-
-        #Create HBox for buttons
+        # Create HBox for buttons
         self.button_box = gtk.HBox()
         self.button_box.show()
 
-        #Cancel button
-        self.cancel = gtk.Button(stock = gtk.STOCK_CANCEL)
+        # Cancel button
+        self.cancel = gtk.Button(stock=gtk.STOCK_CANCEL)
         self.cancel.set_border_width(4)
         self.cancel.connect("clicked", self.cancel_action)
         self.button_box.pack_start(self.cancel)
         self.cancel.show()
 
-        #Logout button
+        # Logout button
         self.logout = gtk.Button("_Log out")
         self.logout.set_border_width(4)
         self.logout.connect("clicked", self.logout_action)
         self.button_box.pack_start(self.logout)
         self.logout.show()
 
-        #Suspend button
+        # Suspend button
         self.suspend = gtk.Button("_Suspend")
         self.suspend.set_border_width(4)
         self.suspend.connect("clicked", self.suspend_action)
         self.button_box.pack_start(self.suspend)
         self.suspend.show()
 
-        #Reboot button
+        # Reboot button
         self.reboot = gtk.Button("_Reboot")
         self.reboot.set_border_width(4)
         self.reboot.connect("clicked", self.reboot_action)
         self.button_box.pack_start(self.reboot)
         self.reboot.show()
 
-        #Shutdown button
+        # Shutdown button
         self.shutdown = gtk.Button("_Power off")
         self.shutdown.set_border_width(4)
         self.shutdown.connect("clicked", self.shutdown_action)
         self.button_box.pack_start(self.shutdown)
         self.shutdown.show()
 
-        #Create HBox for status label
+        # Create HBox for status label
         self.label_box = gtk.HBox()
         self.label_box.show()
         self.status = gtk.Label()
         self.status.show()
         self.label_box.pack_start(self.status)
 
-        #Create VBox and pack the above HBox's
+        # Create VBox and pack the above HBox's
         self.vbox = gtk.VBox()
         self.vbox.pack_start(self.button_box)
         self.vbox.pack_start(self.label_box)

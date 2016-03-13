@@ -4,8 +4,10 @@
 import sys
 import subprocess
 
+
 def exec_command(command):
     return subprocess.check_output(command, shell=True)
+
 
 def handle_command(cmd):
     spotify = 'qdbus org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 %s'
@@ -16,6 +18,7 @@ def handle_command(cmd):
     elif cmd == 'playpause':
         ctrl = spotify % 'org.mpris.MediaPlayer2.Player.PlayPause'
     exec_command(ctrl)
+
 
 def main():
     if len(sys.argv) == 2:

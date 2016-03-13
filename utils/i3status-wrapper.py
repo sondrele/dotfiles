@@ -6,27 +6,33 @@ import subprocess
 import json
 import re
 
+
 def exec_command(command):
     try:
         result = subprocess.check_output(command, shell=True)
     finally:
         return result if result != "" else "Offline"
 
+
 def get_artist(data):
     artist = re.compile("(?<=artist: )[^\n]*", re.UNICODE).findall(data)
     return artist[0]
+
 
 def get_title(data):
     title = re.compile("(?<=title: )[^\n]*", re.UNICODE).findall(data)
     return title[0]
 
+
 def get_metadata():
     metadata = exec_command("qdbus org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Metadata")
     return metadata
 
+
 def is_playing():
     metadata = exec_command("qdbus org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlaybackStatus")
     return metadata.strip() == "Playing"
+
 
 def create_result(now_playing, color):
     return {
@@ -34,6 +40,7 @@ def create_result(now_playing, color):
         "name": "spotify",
         "color": color
     }
+
 
 def get_spotify_status():
     metadata = get_metadata()
@@ -46,10 +53,12 @@ def get_spotify_status():
         color = "#00FF00" if is_playing() else "#FFFF00"
         return create_result(now_playing, color)
 
+
 def print_line(message):
     """ Non-buffered printing to stdout. """
     sys.stdout.write(message + "\n")
     sys.stdout.flush()
+
 
 def read_line():
     """ Interrupted respecting reader for stdin. """
@@ -63,6 +72,7 @@ def read_line():
     # exit on ctrl-c
     except KeyboardInterrupt:
         sys.exit()
+
 
 def main():
     # Skip the first line which contains the version header.
