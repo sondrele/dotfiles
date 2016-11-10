@@ -51,8 +51,11 @@ shopt -s autocd
 # Bash completion
 [ -s "/etc/bash_completion" ] && . "/etc/bash_completion"
 
-# cargo completion
-[ -s "$HOME/.multirust/toolchains/nightly/etc/bash_completion.d/cargo" ] && . "$HOME/.multirust/toolchains/nightly/etc/bash_completion.d/cargo"
+# rust and cargo
+[ -s "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+RUST_HOME=$(rustc --print sysroot)
+[ -s "$RUST_HOME/etc/bash_completion.d/cargo" ] && . "$RUST_HOME/etc/bash_completion.d/cargo"
+export RUST_SRC_PATH="$RUST_HOME/lib/rustlib/src/rust/src"
 
 # django completion
 [ -s "$HOME/.django/django_bash_autocompletion" ] && . "$HOME/.django/django_bash_autocompletion"
