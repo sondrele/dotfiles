@@ -30,58 +30,26 @@
             "type": "con"
         },
         {
-            // splith split container with 2 children
             "border": "normal",
+            "current_border_width": 2,
             "floating": "auto_off",
-            "layout": "splith",
+            "geometry": {
+                "height": 1041,
+                "width": 1916,
+                "x": 0,
+                "y": 0
+            },
+            "name": "Slack - Itera Technology",
             "percent": 0.5,
-            "type": "con",
-            "nodes": [
+            "swallows": [
                 {
-                    "border": "normal",
-                    "current_border_width": 2,
-                    "floating": "auto_off",
-                    "geometry": {
-                        "height": 1041,
-                        "width": 1916,
-                        "x": 2,
-                        "y": 18
-                    },
-                    "name": "Itera Technology - Slack",
-                    "percent": 0.5,
-                    "swallows": [
-                        {
-                            "class": "^Slack$",
-                            "instance": "^slack$",
-                            "title": "Slack$",
-                            "window_role": "^browser\\-window$"
-                        }
-                    ],
-                    "type": "con"
-                },
-                {
-                    "border": "normal",
-                    "current_border_width": 2,
-                    "floating": "auto_off",
-                    "geometry": {
-                       "height": 396,
-                       "width": 640,
-                       "x": 640,
-                       "y": 342
-                    },
-                    "name": "Nylas",
-                    "percent": 0.5,
-                    "swallows": [
-                        {
-                            "class": "^Nylas\\ N1$",
-                            "instance": "^nylas\\ n1$",
-                            "title": "^Nylas$",
-                            "window_role": "^browser\\-window$"
-                        }
-                    ],
-                    "type": "con"
+                    "class": "^Slack$",
+                    "instance": "^slack$",
+                    "title": "^Slack",
+                    "window_role": "^browser\\-window$"
                 }
-            ]
+            ],
+            "type": "con"
         }
     ]
 }

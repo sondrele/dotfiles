@@ -12,7 +12,6 @@
 	submodule-update = submodule update --init --recursive
 	hist = log --all --color --pretty=format:\"%x1b[31m %h %x1b[0m%ad %x1b[32m|%d%x1b[0m%x20%s %x1b[34m[%an]\" --full-history --graph --date=short
 [user]
-	email = sondrele@stud.ntnu.no
 	name = Sondre Lefsaker
 [push]
 	default = simple
@@ -21,4 +20,4 @@
 [core]
 	editor = vim
 [credential]
-        helper = wincred
+	helper = wincred

@@ -57,6 +57,9 @@ shopt -s autocd
 # django completion
 [ -s "$HOME/.django/django_bash_autocompletion" ] && . "$HOME/.django/django_bash_autocompletion"
 
+# nvm completion
+[ -s "$HOME/.nvm/bash_completion" ] && . "$HOME/.nvm/bash_completion"
+
 # set PATH so it includes user's private bin if it exists
 [ -d "$HOME/bin" ] && PATH=$PATH:$HOME/bin
 

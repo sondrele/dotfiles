@@ -12,7 +12,6 @@ set $mod Mod4
 exec --no-startup-id "i3-msg 'workspace 1; append_layout ~/.i3/workspace-www.json'"
 exec --no-startup-id firefox
 exec --no-startup-id slack
-exec --no-startup-id /usr/share/nylas/nylas
 
 # Start various daemons and services
 exec --no-startup-id blueman-applet
@@ -51,7 +50,7 @@ bindsym $mod+control+1 exec setxkbmap us -option "caps:escape" # set US kblayout
 bindsym $mod+control+2 exec setxkbmap no -option "caps:escape" # set norwegian kblayout
 
 # Screen lock and exit
-bindsym control+Mod1+l exec ~/bin/fuzzy-i3lock
+bindsym control+$mod+l exec ~/bin/fuzzy-i3lock
 bindsym $mod+x exec ~/bin/i3-exit
 for_window [class="I3-exit" instance="i3-exit"] floating enable
 
@@ -208,12 +207,14 @@ force_display_urgency_hint 500 ms
 bar {
   # E7450 display
   output eDP1
-
-  # show tray icons on this monitor if it exists
-  tray_output eDP1
+  output HDMI1
 
   # use py3status
   status_command py3status --config ~/.i3/i3status.conf
+
+  # show tray icons on this monitor if it exists
+  tray_output eDP1
+  #tray_output HDMI1
 
   colors {
     background #232323
@@ -233,28 +234,6 @@ bar {
 
   # show tray icons on this monitor if it exists
   tray_output DP1
-
-  # use py3status
-  status_command py3status --config ~/.i3/i3status.conf
-
-  colors {
-    background #232323
-    statusline #dcdcdc
-
-    # Same color scheme as the windows
-    focused_workspace  #325bd6 #003757 #ccd6f4
-    active_workspace   #333333 #5F676A #ffffff
-    inactive_workspace #333333 #424242 #888888
-    urgent_workspace   #C10004 #900000 #ffffff
-  }
-}
-
-bar {
-  # E6420 standard monitor
-  output VGA2
-
-  # show tray icons on this monitor if it exists
-  tray_output VGA2
 
   # use py3status
   status_command py3status --config ~/.i3/i3status.conf

@@ -6,10 +6,13 @@
 	"installed_packages":
 	[
 		"Anaconda",
+		"anaconda_rust",
 		"Babel",
 		"Djaneiro",
 		"EasyMotion",
+		"Git",
 		"GitGutter",
+		"Hyperion for gettext",
 		"Increment Selection",
 		"LESS",
 		"Makefile Improved",
@@ -28,6 +31,7 @@
 		"SublimeLinter",
 		"SublimeLinter-contrib-eslint",
 		"Theme - Soda",
+		"TOML",
 		"TrailingSpaces",
 		"Wrap Plus"
 	]
