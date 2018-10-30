@@ -5,9 +5,9 @@ function cp-download {
   DEST=$1
   NUM=$2
   if [[ $# -eq 2 ]]; then
-    ls -lrt "$HOME/Downloads/" | tail -n $NUM | awk '{print $NF }' | xargs -I{} cp "$HOME/Downloads/{}" $DEST
+    ls -lrt "$HOME/Downloads/" | tail -n $NUM | awk '{print $NF }' | xargs -I{} cp "$HOME/Downloads/{}" "$DEST"
   elif [[ $# -eq 1 ]]; then
-    ls -lrt "$HOME/Downloads/" | tail -n 1 | awk '{print $NF }' | xargs -I{} cp "$HOME/Downloads/{}" $DEST
+    ls -lrt "$HOME/Downloads/" | tail -n 1 | awk '{print $NF }' | xargs -I{} cp "$HOME/Downloads/{}" "$DEST"
   else
     ls -lrt "$HOME/Downloads/" | tail -n 1 | awk '{print $NF }' | xargs -I{} cp "$HOME/Downloads/{}" .
   fi
