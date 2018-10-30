@@ -42,6 +42,7 @@ alias gb="git branch "
 alias gc="git commit"
 alias gd="git diff"
 alias gt="git checkout "
+alias gpu="git push -u origin HEAD"
 
 alias got="git "
 alias gut="git "
