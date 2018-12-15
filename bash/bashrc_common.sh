@@ -1,37 +1,20 @@
-# Define some nice colors
-txtblk='\e[0;30m' # Black - Regular
-txtred='\e[0;31m' # Red
-txtgrn='\e[0;32m' # Green
-txtylw='\e[0;33m' # Yellow
-txtblu='\e[0;34m' # Blue
-txtpur='\e[0;35m' # Purple
-txtcyn='\e[0;36m' # Cyan
-txtwht='\e[0;37m' # White
-bldblk='\e[1;30m' # Black - Bold
-bldred='\e[1;31m' # Red
-bldgrn='\e[1;32m' # Green
-bldylw='\e[1;33m' # Yellow
-bldblu='\e[1;34m' # Blue
-bldpur='\e[1;35m' # Purple
-bldcyn='\e[1;36m' # Cyan
-bldwht='\e[1;37m' # White
-unkblk='\e[4;30m' # Black - Underline
-undred='\e[4;31m' # Red
-undgrn='\e[4;32m' # Green
-undylw='\e[4;33m' # Yellow
-undblu='\e[4;34m' # Blue
-undpur='\e[4;35m' # Purple
-undcyn='\e[4;36m' # Cyan
-undwht='\e[4;37m' # White
-bakblk='\e[40m'   # Black - Background
-bakred='\e[41m'   # Red
-bakgrn='\e[42m'   # Green
-bakylw='\e[43m'   # Yellow
-bakblu='\e[44m'   # Blue
-bakpur='\e[45m'   # Purple
-bakcyn='\e[46m'   # Cyan
-bakwht='\e[47m'   # White
-txtrst='\e[0m'    # Text Reset
+# This script is executed by bash/zsh on the local machine, as well as bash
+# on remote servers (with sshrc)
+
+# load colors that might be used by scripts later
+[ -s "$BASH_HOME/bash_colors.sh" ] && . "$BASH_HOME/bash_colors.sh"
+
+# load aliases
+[ -s "$BASH_HOME/bash_aliases.sh" ] && . "$BASH_HOME/bash_aliases.sh"
+
+# load utils
+[ -s "$BASH_HOME/bash_utils.sh" ] && . "$BASH_HOME/bash_utils.sh"
+
+# load z
+[ -s "$BASH_HOME/z.sh" ] && . "$BASH_HOME/z.sh"
+
+# load bash_completion
+[ -s "/etc/bash_completion" ] && . "/etc/bash_completion"
 
 # enable vi mode
 set -o vi
@@ -42,47 +25,30 @@ bind "set completion-ignore-case on"
 # set autocd
 shopt -s autocd
 
-# load aliases
-[ -s "$BASH_HOME/.bash_aliases" ] && . "$BASH_HOME/.bash_aliases"
-
-# load utils
-[ -s "$BASH_HOME/.bash_utils" ] && . "$BASH_HOME/.bash_utils"
-
-# Bash completion
-[ -s "/etc/bash_completion" ] && . "/etc/bash_completion"
-
 # rust and cargo
-[ -s "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
-RUST_HOME=$(rustc --print sysroot)
-[ -s "$RUST_HOME/etc/bash_completion.d/cargo" ] && . "$RUST_HOME/etc/bash_completion.d/cargo"
-export RUST_SRC_PATH="$RUST_HOME/lib/rustlib/src/rust/src"
+if is_installed rustc; then
+    [ -s "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+    RUST_HOME=$(rustc --print sysroot)
+    [ -s "$RUST_HOME/etc/bash_completion.d/cargo" ] && . "$RUST_HOME/etc/bash_completion.d/cargo"
+    export RUST_SRC_PATH="$RUST_HOME/lib/rustlib/src/rust/src"
+fi
 
 # django completion
 [ -s "$HOME/.django/django_bash_autocompletion" ] && . "$HOME/.django/django_bash_autocompletion"
 
-# nvm completion
-[ -s "$HOME/.nvm/bash_completion" ] && . "$HOME/.nvm/bash_completion"
-
 # set PATH so it includes user's private bin if it exists
 [ -d "$HOME/bin" ] && PATH=$PATH:$HOME/bin
 
-# This loads nvm
-export NVM_DIR="/home/sondre/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+# This loads nvm and its bash_completion
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # Show rvm, nvm, virtualenv and git in PS1
 # Courtesy to https://gist.github.com/shmatov/3508983#file-bash_prompt
 export GIT_PS1_SHOWDIRTYSTATE=1
 function __git_branch {
   __git_ps1 "${bldylw}%s${txtrst}"
-}
-
-function __my_rvm_ruby_version {
-  local gemset=$(echo $GEM_HOME | awk -F'@' '{print $2}')
-  [ "$gemset" != "" ] && gemset="@$gemset"
-  local version=$(echo $MY_RUBY_HOME | awk -F'-' '{print $2}')
-  local full="$version$gemset"
-  [ "$full" != "" ] && echo -e "${bldblu}rb:$full${txtrst}"
 }
 
 # First disable the standard prompt
@@ -101,7 +67,6 @@ function __node {
 
 function __info {
   local full=(
-    $(__my_rvm_ruby_version)
     $(__virtualenv)
     $(__node)
     $(__git_branch)
@@ -110,4 +75,4 @@ function __info {
   [ "$full" != "" ] && echo "[$full]"
 }
 
-PS1="┌─\$(__info)─(${bldblu}\w${txtrst}) - ${txtpur}\u@\h${txtrst}\n└─> "
+PS1="\$(__info) (${bldblu}\w${txtrst}) - ${txtpur}\u@\h${txtrst}\n$ "

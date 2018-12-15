@@ -1,7 +1,15 @@
-# install: ~/.bash_utils
+# a collection of smaller utilities that might have, or might once have had, a value
+
+is_installed() {
+    if hash "$1" 2>/dev/null; then
+        return 0
+    else
+        return 1
+    fi
+}
 
 # function to copy the last downloaded contents to a given directory
-function cp-download {
+function cpd {
   DEST=$1
   NUM=$2
   if [[ $# -eq 2 ]]; then
@@ -29,30 +37,3 @@ function mkcd {
     cd "$1"
 }
 
-# hot-switch
-export HSPATH=$HOME/.hs
-function hs {
-    cd -P "$HSPATH/$1" 2>/dev/null || echo "No such hot-switch: $1"
-}
-
-function hsadd {
-    mkdir -p "$HSPATH"; ln -s "$(pwd)" "$HSPATH/$1"
-}
-
-function hsrm {
-    rm -i -f "$HSPATH/$1"
-}
-
-function hsli {
-    ls -l "$HSPATH" | sed 's/  / /g' | cut -d' ' -f9- | sed 's/ -/\t-/g' && echo
-}
-
-_completehs() {
-  local curw=${COMP_WORDS[COMP_CWORD]}
-  local wordlist=$(find $HSPATH -type l -printf "%f\n")
-  COMPREPLY=($(compgen -W '${wordlist[@]}' -- "$curw"))
-  return 0
-}
-
-# Autocomplete for hot-switch commands
-complete -F _completehs hs hsrm
