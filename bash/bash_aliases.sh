@@ -14,13 +14,15 @@ if_alias diff colordiff
 
 # ls
 alias ls="ls --color=auto"
-alias l="ls"
-alias ll="ls -hog"
-alias la="ls -A"
+alias l="ls --group-directories-first"
+alias ll="l -lh"
+alias lla="ll -A"
+alias la="l -A"
 # ls last file changed
 alias lf="ls -rt | tail -n1"
 # sort by date
 alias lt="ls -lrt"
+alias lat="ls -lrta"
 # ls last downloaded
 alias ld="ls -lrt ~/Downloads | tail -n10"
 
@@ -33,6 +35,11 @@ alias make="make SHELL=/bin/bash"
 
 # utils
 if_alias go gnome-open
+if_alias go xdg-open
+
+# system utils
+alias gctrl="env XDG_CURRENT_DESKTOP=GNOME gnome-control-center"
+alias rzshrc="source ~/.zshrc"
 
 # git
 if_alias git hub
@@ -43,6 +50,8 @@ alias gc="git commit"
 alias gd="git diff"
 alias gt="git checkout "
 alias gpu="git push -u origin HEAD"
+alias ggrep="git grep"
 
 alias got="git "
 alias gut="git "
+
