@@ -7,6 +7,7 @@
 	st = status
 	br = branch
 	f = fetch
+	last = "!git --no-pager log -n 1"
 	rmc = rm --cached
 	type = cat-file -t
 	dump = cat-file -p
@@ -16,11 +17,13 @@
 	hist = log --all --color --pretty=format:\"%x1b[31m %h %x1b[0m%ad %x1b[32m|%d%x1b[0m%x20%s %x1b[34m[%an]\" --full-history --graph --date=short
 [user]
 	name = Sondre Lefsaker
+	email = sondre@nettbureau.no
 [push]
 	default = simple
 [color]
 	ui = true
 [core]
 	editor = vim
-[credential]
-	helper = wincred
+	pager = less
+[rebase]
+	autosquash = true
