@@ -8,16 +8,18 @@
 	br = branch
 	f = fetch
 	last = "!git --no-pager log -n 1"
+	d = "!git --no-pager diff"
+	autosquash = "!f() { GIT_SEQUENCE_EDITOR=: git rebase -i $1; }; f"
 	rmc = rm --cached
 	type = cat-file -t
 	dump = cat-file -p
 	words = diff --color-words
-	showstash = stash show -p stash@{0}
+	show-stash = stash show -p stash@{0}
+	show-staged = diff --cached
 	submodule-update = submodule update --init --recursive
 	hist = log --all --color --pretty=format:\"%x1b[31m %h %x1b[0m%ad %x1b[32m|%d%x1b[0m%x20%s %x1b[34m[%an]\" --full-history --graph --date=short
-[user]
-	name = Sondre Lefsaker
-	email = sondre@nettbureau.no
+	pushf = push --force-with-lease
+	pul = pull
 [push]
 	default = simple
 [color]
@@ -27,3 +29,9 @@
 	pager = less
 [rebase]
 	autosquash = true
+[pager]
+	branch = false
+[pull]
+	rebase = true
+# [commit]
+#	gpgSign = true

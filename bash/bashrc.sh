@@ -1,14 +1,11 @@
 # install: ~/.bashrc
 
-# Paths
-IDEA_HOME=/opt/idea
-JAVA_HOME=/usr/bin/java
-SCALA_HOME=/opt/scala
-GRADLE_HOME=/usr/lib/gradle/2.10/
-ACTIVATOR_HOME=$HOME/bin/activator-dist-1.3.7
-ANDROID_HOME=$HOME/Android/Sdk
+# Paths, if needed
+# JAVA_HOME=
+# SCALA_HOME=
+# GRADLE_HOME=
 
-PATH=$PATH:$SCALA_HOME/bin:$IDEA_HOME/bin:$ACTIVATOR_HOME:$ANDROID_HOME/tools
+export PATH="$HOME/.yarn/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 
 # Used with Rust

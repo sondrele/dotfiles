@@ -8,19 +8,16 @@ set $mod Mod4
 # Startup programs
 ####################################################################################################
 
-# Initiate layout for workspace 1
-exec --no-startup-id "i3-msg 'workspace 1; append_layout ~/.i3/workspace-www.json'"
-exec --no-startup-id firefox
-exec --no-startup-id slack
+# Start slack on workspace 1
+exec --no-startup-id i3-msg 'workspace 1; exec slack'
 
 # Start various daemons and services
-exec --no-startup-id blueman-applet
-exec --no-startup-id dropbox start
-exec --no-startup-id dunst
-exec --no-startup-id feh --bg-center /usr/share/backgrounds/linuxmint-rafaela/rapciu_baltic.png
-exec --no-startup-id gnome-settings-daemon
+# exec --no-startup-id blueman-applet
 exec --no-startup-id nm-applet
-exec --no-startup-id redshift -l 59.95:10.75
+# exec --no-startup-id .dropbox-dist/dropboxd
+exec --no-startup-id dunst
+exec --no-startup-id feh --bg-scale $(ls /usr/share/backgrounds/*.jpg | sort -R | head -1)
+exec --no-startup-id redshift -l 59.95:10.75 -t 5000K:3500K # redshift -l 59.95:10.75
 exec --no-startup-id xautolock -time 15 -locker ~/bin/fuzzy-i3lock
 
 # Start spotify and move it to the scratchpad
@@ -31,6 +28,7 @@ bindsym Mod1+s [class="Spotify"] scratchpad show
 # Enable floating for programs that does not need to cover the whole screen
 # 'xprop' can be used to find class and title
 for_window [class="Gcalctool"] floating enable
+for_window [class="Gnome-calculator"] floating enable
 for_window [class="File-roller"] floating enable
 
 ####################################################################################################
@@ -41,9 +39,11 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+n      exec firefox
 # bindsym $mod+p    exec dmenu_run
 bindsym $mod+p      exec j4-dmenu-desktop
-bindsym $mod+o      exec subl
+bindsym $mod+o      exec code
 
-bindsym $mod+t      exec "~/bin/terminal-layout 3"
+# make sure that firefox, vscode (and other programs?) does not quit when accidentally pressing ctrl+q
+bindsym Control+q exec echo "" > /dev/null
+
 
 # keyboard layout toggle
 bindsym $mod+control+1 exec setxkbmap us -option "caps:escape" # set US kblayout
@@ -51,8 +51,20 @@ bindsym $mod+control+2 exec setxkbmap no -option "caps:escape" # set norwegian k
 
 # Screen lock and exit
 bindsym control+$mod+l exec ~/bin/fuzzy-i3lock
-bindsym $mod+x exec ~/bin/i3-exit
-for_window [class="I3-exit" instance="i3-exit"] floating enable
+
+# Create Log out, Reboot, Poweroff bindings
+mode "(S)uspend, (L)ogout, (R)eboot, (P)oweroff" {
+    bindsym r exec --no-startup-id systemctl reboot
+    bindsym s exec --no-startup-id systemctl suspend; mode "default"
+    bindsym l exit
+    bindsym p exec --no-startup-id systemctl poweroff
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+x mode "(S)uspend, (L)ogout, (R)eboot, (P)oweroff"
 
 # Control spotify
 bindsym $mod+Control+Left  exec ~/bin/spotify-control prev
@@ -205,12 +217,12 @@ force_display_urgency_hint 500 ms
 
 # Start i3bar for all displays to display a workspace bar
 bar {
-  # E7450 display
-  output eDP1
-  output HDMI1
+  tray_output DP-2-2
+  tray_output eDP-1
+  tray_output primary
 
   # use py3status
-  status_command py3status --config ~/.i3/i3status.conf
+  status_command py3status --config ~/.i3/i3status.conf --log-file ~/.i3/py3status.log
 
   # show tray icons on this monitor if it exists
   tray_output eDP1
@@ -228,46 +240,3 @@ bar {
   }
 }
 
-bar {
-  # E6420 standard monitor
-  output DP1
-
-  # show tray icons on this monitor if it exists
-  tray_output DP1
-
-  # use py3status
-  status_command py3status --config ~/.i3/i3status.conf
-
-  colors {
-    background #232323
-    statusline #dcdcdc
-
-    # Same color scheme as the windows
-    focused_workspace  #325bd6 #003757 #ccd6f4
-    active_workspace   #333333 #5F676A #ffffff
-    inactive_workspace #333333 #424242 #888888
-    urgent_workspace   #C10004 #900000 #ffffff
-  }
-}
-
-bar {
-  # E6420 display
-  output LVDS2
-
-  # show tray icons on the primary monitor
-  tray_output primary
-
-  # use py3status
-  status_command py3status --config ~/.i3/i3status-small.conf
-
-  colors {
-    background #232323
-    statusline #dcdcdc
-
-    # Same color scheme as the windows
-    focused_workspace  #325bd6 #003757 #ccd6f4
-    active_workspace   #333333 #5F676A #ffffff
-    inactive_workspace #333333 #424242 #888888
-    urgent_workspace   #C10004 #900000 #ffffff
-  }
-}

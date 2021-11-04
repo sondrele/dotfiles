@@ -1,8 +1,5 @@
 # install: ~/.bash_aliases
 
-# Add to PATH if not present already
-PATH=$PATH:$HOME/bin
-
 # set alias if command exists
 if_alias() {
     if hash "$2" 2>/dev/null; then
@@ -42,16 +39,15 @@ alias gctrl="env XDG_CURRENT_DESKTOP=GNOME gnome-control-center"
 alias rzshrc="source ~/.zshrc"
 
 # git
-if_alias git hub
-alias gs="git status "
-alias ga="git add "
-alias gb="git branch "
-alias gc="git commit"
-alias gd="git diff"
-alias gt="git checkout "
-alias gpu="git push -u origin HEAD"
-alias ggrep="git grep"
-
+# if_alias git hub
 alias got="git "
 alias gut="git "
 
+alias gs="git status"
+alias ga="git add"
+alias gb="git branch"
+alias gc="git commit -S"
+alias gd="git diff"
+alias gt="git checkout"
+alias gpu="git push -u origin HEAD"
+alias gg="git grep"

@@ -10,8 +10,8 @@ is_installed() {
 
 # function to copy the last downloaded contents to a given directory
 function cpd {
-  DEST=$1
-  NUM=$2
+  DEST="$1"
+  NUM="$2"
   if [[ $# -eq 2 ]]; then
     ls -lrt "$HOME/Downloads/" | tail -n $NUM | awk '{print $NF }' | xargs -I{} cp "$HOME/Downloads/{}" "$DEST"
   elif [[ $# -eq 1 ]]; then
@@ -36,4 +36,3 @@ function mkcd {
     mkdir "$1"
     cd "$1"
 }
-

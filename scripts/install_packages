@@ -6,7 +6,7 @@ FLAG=$1
 echo "
   Options (choose one):
   -v      Verbose output (debug)
-  -u      Force update for apt-get repositories
+  -u      Force update for apt repositories
 
   Executing with: $FLAG
 
@@ -16,43 +16,41 @@ if [ "$FLAG" = "-v" ]; then
     set -x
 fi
 
-PACKAGES="
-clang
-cmake
+APT_PACKAGES="
 colordiff
 curl
-dropbox
 dunst
 feh
+fonts-firacode
+g++
 git
 git-extras
-gnome-control-center
-gnome-settings-daemon
+hub
+i3
 i3lock
+i3lock-fancy
 i3status
-nm-applet
+j4-dmenu-desktop
 redshift
+py3status
+qdbus-qt5
 scrot
 slack
 tree
+ubuntu-restricted-extras
 unp
 vim
-wicd-gtk
 xautolock
 "
 
-OTHER="
-i3
-blueman-applet
-dmenu
-firefox
-j4-dmenu-desktop
+SNAP_PACKAGES="
+bitwarden
 spotify
-subl
+slack --classic
 "
 
 # Ensure that ~/opt and ~/bin exists
-mkdir -p $HOME/opt/hub
+mkdir -p $HOME/opt
 mkdir -p $HOME/bin
 
 # Add to PATH if not present already
@@ -69,88 +67,53 @@ is_installed() {
 
 update() {
     echo "  updating..."
-    sudo apt-get update $1
+    sudo apt update $1
 }
 
-install() {
-    if ! is_installed $1; then
+apt_install() {
+    if ! is_installed "$1"; then
         echo  "  installling: '$1'"
-        sudo apt-get install -y --force-yes $1
+        sudo apt install -y --force-yes "$1"
     fi
 }
 
-# Custom
-install_spotify() {
-    # Source: https://www.spotify.com/us/download/previews/
-    if is_installed spotify; then
-        return 0
+snap_install() {
+    NAME=$(echo "$1" | cut -d" " -f1)
+
+    if ! is_installed "$NAME"; then
+        echo  "  installling: '$1'"
+        sudo snap install "$1"
     fi
-    echo "  Installing: 'spotify'"
-
-    # 1. Add the Spotify repository signing key to be able to verify downloaded packages
-    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D2C19886
-
-    # 2. Add the Spotify repository
-    echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
-
-    # 3. Update list of available packages
-    update
-
-    # 4. Install Spotify
-    sudo apt-get install spotify-client
 }
 
-install_j4_dmenu_desktop() {
-    if is_installed j4-dmenu-desktop; then
-        return 0
-    fi
-    echo "  Installing: 'j4-dmenu-desktop'"
-
-    git clone https://github.com/enkore/j4-dmenu-desktop
-    cd j4-dmenu-desktop
-    cmake .
-    make
-    sudo make install
-}
-
-install_hub() {
-    if is_installed hub; then
-        return 0
-    fi
-    echo "  Installing: 'hub'"
-
-    wget -q -O hub.tar.gz https://github.com/github/hub/releases/download/v2.2.1/hub-linux-amd64-2.2.1.tar.gz
-    tar -xf hub.tar.gz -C $HOME/opt/hub --strip-components=1
-    cp $HOME/opt/hub/hub $HOME/bin
-}
-
-install_sublime() {
-    sudo apt-get install sublime-text
-    # Install package control
-    INSTALL_DIR="$HOME/.config/sublime-text-3/Installed Packages"
-    mkdir -p "$INSTALL_DIR"
-    wget -O "$INSTALL_DIR/Package Control.sublime-package" "https://packagecontrol.io/Package%20Control.sublime-package"
-}
-
-# $1: command
-# $2: actual package
-install_custom() {
-    if is_installed "$1"; then
+install_nvm() {
+    if is_installed nvm; then
         return 0
     fi
 
-    install "$2"
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 }
 
-install_i3() {
-    if is_installed i3; then
+install_sshrc() {
+    if is_installed sshrc; then
         return 0
     fi
 
-    echo "deb http://debian.sur5r.net/i3/ maya universe" | sudo tee -a /etc/apt/sources.list.d/i3-wm.list
-    sudo apt-get --allow-unauthenticated install sur5r-keyring
-    update
-    install i3
+    wget https://raw.githubusercontent.com/Russell91/sshrc/master/sshrc
+    chmod +x sshrc
+    sudo mv sshrc $HOME/bin
+}
+
+install_packages() {
+    for package in $APT_PACKAGES
+    do
+        apt_install $package
+    done
+
+    for package in $SNAP_PACKAGES
+    do
+        snap_install $package
+    done
 }
 
 # Install
@@ -163,30 +126,19 @@ report_uninstalled() {
     done
 }
 
-install_packages() {
-    for package in $PACKAGES
-    do
-        install $package
-    done
-}
-
 run() {
-    report_uninstalled $PACKAGES
-    report_uninstalled $OTHER
+    report_uninstalled $APT_PACKAGES
+    report_uninstalled $SNAP_PACKAGES
 
     if [ "$FLAG" = "-u" ]; then
         update
     fi
 
-    install_packages $PACKAGES
+    install_packages
 
     # Custom install
-    install_i3
-    install_custom demnu suckless-tools
-    install_sublime
-    install_spotify
-    install_j4_dmenu_desktop
-    install_hub
+    install_nvm
+    install_sshrc
 }
 
 # Move into 'tmp' and make hell...
