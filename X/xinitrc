@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# This file is (partly?) described here:
+# https://unix.stackexchange.com/questions/281858/difference-between-xinitrc-xsession-and-xsessionrc
+
+[[ -f ~/.Xmodmap .]] && xmodmap ~/.Xmodmap
