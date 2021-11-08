@@ -86,16 +86,6 @@ snap_install() {
     fi
 }
 
-install_sshrc() {
-    if is_installed sshrc; then
-        return 0
-    fi
-
-    wget https://raw.githubusercontent.com/Russell91/sshrc/master/sshrc
-    chmod +x sshrc
-    sudo mv sshrc $HOME/bin
-}
-
 install_asdf() {
     if is_installed asdf; then
         return 0
@@ -138,7 +128,6 @@ run() {
 
     # Custom install
     install_asdf
-    install_sshrc
 }
 
 # Move into 'tmp' and make hell...
