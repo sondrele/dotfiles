@@ -86,14 +86,6 @@ snap_install() {
     fi
 }
 
-install_nvm() {
-    if is_installed nvm; then
-        return 0
-    fi
-
-    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
-}
-
 install_sshrc() {
     if is_installed sshrc; then
         return 0
@@ -102,6 +94,14 @@ install_sshrc() {
     wget https://raw.githubusercontent.com/Russell91/sshrc/master/sshrc
     chmod +x sshrc
     sudo mv sshrc $HOME/bin
+}
+
+install_asdf() {
+    if is_installed asdf; then
+        return 0
+    fi
+
+    git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.1
 }
 
 install_packages() {
@@ -137,7 +137,7 @@ run() {
     install_packages
 
     # Custom install
-    install_nvm
+    install_asdf
     install_sshrc
 }
 

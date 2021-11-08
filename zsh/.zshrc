@@ -66,10 +66,12 @@ ZSH_THEME="oxide"
 plugins=(
   git
   git-extras
+  gh
   vi-mode
   web-search
   yarn
   z
+  asdf
 )
 
 source $ZSH/oh-my-zsh.sh
