@@ -37,8 +37,7 @@ for_window [class="File-roller"] floating enable
 
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+n      exec firefox
-# bindsym $mod+p    exec dmenu_run
-bindsym $mod+p      exec j4-dmenu-desktop
+bindsym $mod+p exec j4-dmenu-desktop --dmenu "dmenu -i -nf '#F8F8F2' -nb '#282A36' -sb '#6272A4' -sf '#F8F8F2' -fn 'monospace-10'"
 bindsym $mod+o      exec code
 
 # make sure that firefox, vscode (and other programs?) does not quit when accidentally pressing ctrl+q
@@ -206,11 +205,13 @@ floating_modifier $mod
 font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 
 # Window title color
-#colorclass #border #background #text #indicator
-client.focused          #325bd6 #003757 #ccd6f4 #0075b9
-client.focused_inactive #333333 #5F676A #ffffff #484E50
-client.unfocused        #333333 #424242 #888888 #292D2E
-client.urgent           #C10004 #900000 #ffffff #900000
+# class                 border  bground text    indicator child_border
+client.focused          #6272A4 #6272A4 #F8F8F2 #bd93f9   #6272A4
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+
 # Wait before switching from urgency to focused
 force_display_urgency_hint 500 ms
 
@@ -229,14 +230,15 @@ bar {
   #tray_output HDMI1
 
   colors {
-    background #232323
-    statusline #dcdcdc
+    background #282A36
+    statusline #F8F8F2
+    separator  #44475A
 
-    # Same color scheme as the windows
-    focused_workspace  #325bd6 #003757 #ccd6f4
-    active_workspace   #333333 #5F676A #ffffff
-    inactive_workspace #333333 #424242 #888888
-    urgent_workspace   #C10004 #900000 #ffffff
+    focused_workspace  #44475A #44475A #F8F8F2
+    active_workspace   #282A36 #44475A #F8F8F2
+    inactive_workspace #282A36 #282A36 #BFBFBF
+    urgent_workspace   #FF5555 #FF5555 #F8F8F2
+    binding_mode       #FF5555 #FF5555 #F8F8F2
   }
 }
 
