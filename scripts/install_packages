@@ -17,6 +17,7 @@ if [ "$FLAG" = "-v" ]; then
 fi
 
 APT_PACKAGES="
+ripgrep
 colordiff
 curl
 dunst
@@ -25,17 +26,13 @@ fonts-firacode
 g++
 git
 git-extras
-hub
 i3
 i3lock
-i3lock-fancy
 i3status
 j4-dmenu-desktop
 redshift
 py3status
 qdbus-qt5
-scrot
-slack
 tree
 ubuntu-restricted-extras
 unp
@@ -86,22 +83,12 @@ snap_install() {
     fi
 }
 
-install_nvm() {
-    if is_installed nvm; then
+install_asdf() {
+    if is_installed asdf; then
         return 0
     fi
 
-    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
-}
-
-install_sshrc() {
-    if is_installed sshrc; then
-        return 0
-    fi
-
-    wget https://raw.githubusercontent.com/Russell91/sshrc/master/sshrc
-    chmod +x sshrc
-    sudo mv sshrc $HOME/bin
+    git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.11.1
 }
 
 install_packages() {
@@ -114,6 +101,12 @@ install_packages() {
     do
         snap_install $package
     done
+
+    # Custom install
+    install_asdf
+
+    # TODO: install nerd-fonts
+    # TODO: install i3: https://i3wm.org/docs/repositories.html
 }
 
 # Install
@@ -135,10 +128,6 @@ run() {
     fi
 
     install_packages
-
-    # Custom install
-    install_nvm
-    install_sshrc
 }
 
 # Move into 'tmp' and make hell...

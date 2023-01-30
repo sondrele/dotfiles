@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import sys
@@ -24,12 +24,12 @@ def main():
     if len(sys.argv) == 2:
         handle_command(sys.argv[1])
     else:
-        print """
+        print("""
         Argument:
             'next', 'prev' or 'playpause'
         Example:
             $ ./spotify-ctrl.py next
-        """
+        """)
 
 if __name__ == '__main__':
     main()
