@@ -5,9 +5,6 @@
 # SCALA_HOME=
 # GRADLE_HOME=
 
-export PATH="$HOME/.yarn/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
-
 # Used with Rust
 LD_LIBRARY_PATH=/usr/local/lib
 
