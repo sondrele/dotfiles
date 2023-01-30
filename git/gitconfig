@@ -1,6 +1,5 @@
 [user]
 	name = "Sondre Lefsaker"
-	email = "leffsa@gmail.com"
 [alias]
 	co = checkout
 	ci = commit
@@ -20,6 +19,8 @@
 	hist = log --all --color --pretty=format:\"%x1b[31m %h %x1b[0m%ad %x1b[32m|%d%x1b[0m%x20%s %x1b[34m[%an]\" --full-history --graph --date=short
 	pushf = push --force-with-lease
 	pul = pull
+	current = rev-parse --abbrev-ref HEAD
+	restore-staged = restore --staged .
 [push]
 	default = simple
 [color]
@@ -27,11 +28,14 @@
 [core]
 	editor = vim
 	pager = less
+	excludesfile = /home/sondre/.gitignore
 [rebase]
 	autosquash = true
 [pager]
 	branch = false
 [pull]
 	rebase = true
-# [commit]
-#	gpgSign = true
+[commit]
+	gpgSign = true
+[credential "https://github.com"]
+	helper = !/usr/bin/gh auth git-credential

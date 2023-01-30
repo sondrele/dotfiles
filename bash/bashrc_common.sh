@@ -65,6 +65,8 @@ function __node {
   [ "$v" != "" ] && echo -e "${bldred}n:${v:1}${txtrst}"
 }
 
+# TODO: add support for `asdf current` instead
+
 function __info {
   local full=(
     $(__virtualenv)

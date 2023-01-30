@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# TODO: automate installation of nerd-fonts
+
 set -e
 
 FLAG=$1
@@ -17,6 +19,8 @@ if [ "$FLAG" = "-v" ]; then
 fi
 
 APT_PACKAGES="
+bat
+ripgrep
 colordiff
 curl
 dunst

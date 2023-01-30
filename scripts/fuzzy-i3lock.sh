@@ -1,8 +1,8 @@
 #!/bin/sh -e
 
-scrot /tmp/screenshot-i3lock.png
+scrot -o /tmp/screenshot-i3lock.png
 
-mogrify -blur 0x6 /tmp/screenshot-i3lock.png
+mogrify -scale 10% -blur 0x1 -resize 1000% /tmp/screenshot-i3lock.png
 
 i3lock -i /tmp/screenshot-i3lock.png
 

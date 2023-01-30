@@ -64,14 +64,20 @@ ZSH_THEME="oxide"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  asdf
+  docker
+  docker-compose
+  gcloud
   git
   git-extras
   gh
+  gradle
+  kubectl
+  kube-ps1
   vi-mode
   web-search
   yarn
   z
-  asdf
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -108,6 +114,4 @@ source $ZSH/oh-my-zsh.sh
 [ -s "$HOME/.bashrc.d/bash_aliases.sh" ] && . "$HOME/.bashrc.d/bash_aliases.sh"
 [ -s "$HOME/.bashrc.d/bash_utils.sh" ] && . "$HOME/.bashrc.d/bash_utils.sh"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+PROMPT='$(kube_ps1)'$PROMPT
