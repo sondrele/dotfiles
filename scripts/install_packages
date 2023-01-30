@@ -1,7 +1,5 @@
 #!/bin/sh
 
-# TODO: automate installation of nerd-fonts
-
 set -e
 
 FLAG=$1
@@ -19,7 +17,6 @@ if [ "$FLAG" = "-v" ]; then
 fi
 
 APT_PACKAGES="
-bat
 ripgrep
 colordiff
 curl
@@ -29,17 +26,13 @@ fonts-firacode
 g++
 git
 git-extras
-hub
 i3
 i3lock
-i3lock-fancy
 i3status
 j4-dmenu-desktop
 redshift
 py3status
 qdbus-qt5
-scrot
-slack
 tree
 ubuntu-restricted-extras
 unp
@@ -95,7 +88,7 @@ install_asdf() {
         return 0
     fi
 
-    git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.1
+    git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.11.1
 }
 
 install_packages() {
@@ -108,6 +101,12 @@ install_packages() {
     do
         snap_install $package
     done
+
+    # Custom install
+    install_asdf
+
+    # TODO: install nerd-fonts
+    # TODO: install i3: https://i3wm.org/docs/repositories.html
 }
 
 # Install
@@ -129,9 +128,6 @@ run() {
     fi
 
     install_packages
-
-    # Custom install
-    install_asdf
 }
 
 # Move into 'tmp' and make hell...
