@@ -13,3 +13,4 @@ export BASH_HOME="$HOME/.bashrc.d"
 
 # load bash config common for local system and remote systems over ssh
 [ -s "$BASH_HOME/bashrc_common.sh" ] && . "$BASH_HOME/bashrc_common.sh"
+. "$HOME/.cargo/env"

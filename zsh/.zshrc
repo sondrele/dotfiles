@@ -76,7 +76,6 @@ plugins=(
   kube-ps1
   vi-mode
   web-search
-  yarn
   z
 )
 
@@ -115,3 +114,14 @@ source $ZSH/oh-my-zsh.sh
 [ -s "$HOME/.bashrc.d/bash_utils.sh" ] && . "$HOME/.bashrc.d/bash_utils.sh"
 
 PROMPT='$(kube_ps1)'$PROMPT
+
+# NAV
+# export KUBECONFIG="/home/sondre/dev/nav/kubeconfigs/config"
+export KREW_ROOT="$ASDF_DIR/installs/krew/0.4.3"
+export PATH="$KREW_ROOT/bin:$PATH"
+
+export PATH="$HOME/.local/bin:$PATH"
+
+eval "$(direnv hook zsh)"
+
+

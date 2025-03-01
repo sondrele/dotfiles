@@ -16,6 +16,7 @@ exec --no-startup-id i3-msg 'workspace 1; exec slack'
 exec --no-startup-id nm-applet
 # exec --no-startup-id .dropbox-dist/dropboxd
 exec --no-startup-id dunst
+exec --no-startup-id naisdevice
 exec --no-startup-id feh --bg-scale $(ls /usr/share/backgrounds/*.jpg | sort -R | head -1)
 exec --no-startup-id redshift -l 59.95:10.75 -t 5000K:3500K # redshift -l 59.95:10.75
 exec --no-startup-id xautolock -time 15 -locker ~/bin/fuzzy-i3lock
@@ -29,6 +30,7 @@ bindsym Mod1+s [class="Spotify"] scratchpad show
 # 'xprop' can be used to find class and title
 for_window [class="Gcalctool"] floating enable
 for_window [class="Gnome-calculator"] floating enable
+for_window [class="Gnome-calendar"] floating enable
 for_window [class="File-roller"] floating enable
 
 ####################################################################################################
@@ -50,6 +52,21 @@ bindsym $mod+control+2 exec setxkbmap no -option "caps:escape" # set norwegian k
 
 # Screen lock and exit
 bindsym control+$mod+l exec ~/bin/fuzzy-i3lock
+
+# Xrandr
+mode "(H)ome, (R)ight, (L)left, (M)irror, (O)ff" {
+    bindsym h exec --no-startup-id xrandr --output DP-1-0 --left-of eDP-1 --mode 5120x2160; mode "default"
+    bindsym r exec --no-startup-id xrandr --output DP-1-0 --right-of eDP-1 --auto; mode "default"
+    bindsym l exec --no-startup-id xrandr --output DP-1-0 --left-of eDP-1 --auto; mode "default"
+    bindsym m exec --no-startup-id xrandr --output DP-1-0 --same-as eDP-1 --auto; mode "default"
+    bindsym o exec --no-startup-id xrandr --output DP-1-0 --off; mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+z mode "(H)ome, (R)ight, (L)left, (M)irror, (O)ff"
 
 # Create Log out, Reboot, Poweroff bindings
 mode "(S)uspend, (L)ogout, (R)eboot, (P)oweroff" {
@@ -184,6 +201,11 @@ mode "resize" {
   bindsym k resize shrink height 10 px or 10 ppt
   bindsym l resize grow width 10 px or 10 ppt
 
+  bindsym Shift+h resize shrink width 100 px or 100 ppt
+  bindsym Shift+j resize grow height 100 px or 100 ppt
+  bindsym Shift+k resize shrink height 100 px or 100 ppt
+  bindsym Shift+l resize grow width 100 px or 100 ppt
+
   # back to normal: Enter or Escape
   bindsym Return mode "default"
   bindsym Escape mode "default"
@@ -224,6 +246,7 @@ bar {
   # tray_output DP-0
   tray_output eDP-1
   tray_output eDP-1-1
+  tray_output DP-1-0
   tray_output primary
 
   # use py3status

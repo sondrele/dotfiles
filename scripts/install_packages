@@ -26,6 +26,7 @@ fonts-firacode
 g++
 git
 git-extras
+gnome-disk-utils
 i3
 i3lock
 i3status
@@ -34,7 +35,8 @@ redshift
 py3status
 qdbus-qt5
 tree
-ubuntu-restricted-extras
+scrot # fuzzy i3 lock
+imagemagick # fuzzy i3 lock
 unp
 vim
 xautolock
@@ -43,7 +45,7 @@ xautolock
 SNAP_PACKAGES="
 bitwarden
 spotify
-slack --classic
+slack
 "
 
 # Ensure that ~/opt and ~/bin exists

@@ -21,14 +21,18 @@
 	pul = pull
 	current = rev-parse --abbrev-ref HEAD
 	restore-staged = restore --staged .
+	prune-remote-branches = remote prune origin
 [push]
 	default = simple
+	autoSetupRemote = true
 [color]
 	ui = true
 [core]
 	editor = vim
-	pager = less
+	pager = delta --line-numbers --side-by-side
 	excludesfile = /home/sondre/.gitignore
+[interactive]
+	diffFilter = delta --line-numbers --color-only --features=interactive
 [rebase]
 	autosquash = true
 [pager]
