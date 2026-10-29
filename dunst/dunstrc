@@ -28,7 +28,7 @@
     show_indicators = yes
     icon_position = left
     max_icon_size = 32
-    icon_path = /usr/share/icons/Paper/16x16/status/:/usr/share/icons/Paper/16x16/devices/:/usr/share/icons/Paper/16x16/apps/
+    # icon_path = /usr/share/icons/Paper/16x16/status/:/usr/share/icons/Paper/16x16/devices/:/usr/share/icons/Paper/16x16/apps/
     sticky_history = yes
     history_length = 20
     always_run_script = true
@@ -65,5 +65,5 @@
     background = "#ff5555"
     foreground = "#f8f8f2"
     timeout = 0
-    icon = /usr/shareicons/Adwaita/scalable/status/dialog-warning-symbolic.svg
+    # icon = /usr/shareicons/Adwaita/scalable/status/dialog-warning-symbolic.svg
     # icon = /usr/share/icons/Paper/16x16/status/dialog-warning.png

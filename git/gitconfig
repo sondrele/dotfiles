@@ -21,14 +21,19 @@
 	pul = pull
 	current = rev-parse --abbrev-ref HEAD
 	restore-staged = restore --staged .
+	cleanup = "!git branch --merged | grep  -v '\\*\\|\\+\\|main\\|master' | xargs -n 1 -r git branch -d"
 [push]
 	default = simple
 [color]
 	ui = true
 [core]
 	editor = vim
-	pager = less
+	# pager = less
+	pager = delta
 	excludesfile = /home/sondre/.gitignore
+[delta]
+    # side-by-side = true
+	navigate = true
 [rebase]
 	autosquash = true
 [pager]
