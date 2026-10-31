@@ -1,0 +1,4 @@
+# CLI tools that aren't in Ubuntu's archive (or are too old there).
+# Add more with `mise use -g <tool>@latest`; it writes straight back into this file.
+[tools]
+starship = "latest"

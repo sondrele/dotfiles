@@ -1,64 +1,87 @@
 # dotfiles
 
-## Setup p16s
+Oppsett for p16s: Ubuntu, sway, Noctalia og fish.
 
-- Installere regolith: https://regolith-desktop.com/
-    - Base i3-config 
-        - `/etc/regolith/i3/config`
-        - `/usr/share/regolith/i3/config.d/`
-    - Base sway-config: 
-        - /etc/regolith/sway/config
-        - /etc/regolith/i3status-rust/config.toml
-    - Custom config
-        - Common
-            - `$HOME/.config/regolith3/common-wm/config.d`
-        - Sway
-            - `/home/sondre/.config/i3status-rust/config.toml` (kopiert fra /etc/regolith/i3status-rust/config.toml)
-            - `~/.config/regolith3/Xresources`
-            - `$HOME/.config/regolith3/common-wm/config.d`
-    - Bytte ut `rofication` med `dunst`
-        - https://regolith-desktop.com/docs/howtos/replace-notification-system/
+- `home/` speiler `$HOME` og symlinkes inn med [GNU stow](https://www.gnu.org/software/stow/).
+  Endringer i repoet gjelder umiddelbart.
+- `packages/apt.txt` er pakkene fra Ubuntu.
+- `packages/recipes/` har ett lite skript per ting som trenger eget repo eller installer
+  (docker, mise, fisher). Hvert skript har `source:` og `verified:` øverst.
+- CLI-verktøy som ikke finnes i Ubuntu legges i `home/.config/mise/config.toml`,
+  fish-plugins i `home/.config/fish/fish_plugins`.
 
-- Installere utils via apt:
-    - `find-fd`
-    - `fzf`
-    - `bat` og sett opp symlink:
-        - mkdir -p .local/bin
-        - ln -s /usr/bin/batcat .local/bin/bat
-    - `ripgrep`
-    - `git-delta`
+## Ny maskin
 
-- Installere fish: https://fishshell.com/
-    - Sørg for at ~/.local/bin blir tilgjengelig: `fish_add_path -m ~/.local/bin`
-    - Installere `fisher`: https://github.com/jorgebucaran/fisher
-    - Og andre plugins
-        - `fisher install jorgebucaran/autopair.fish` - https://github.com/jorgebucaran/autopair.fish
-        - `fisher install PatrickF1/fzf.fish` - https://github.com/PatrickF1/fzf.fish
-        - `fisher install jethrokuan/z` - https://github.com/jethrokuan/z
+1. Installer avhengigheter
+  - Noctalia: https://docs.noctalia.dev/noctalia/getting-started/installation/
 
-- Installere `mise`: https://mise.jdx.dev/getting-started.html
-    - Legg til `mise activate fish | source` i `~/.config/fish/config.fish`
+2. Installer dotfiles
 
-- Installere `starship`: https://starship.rs/ 
-    - Legg til `starship init fish | source` i `~/.config/fish/config.fish`
-    - Oppdaterte config i `~/.config/starship.toml`
-    - TODO:
-        - Flytte plass på kubernetes til etter git
-        - Skru av gcloud?
+```bash
+sudo apt install git make
+git clone https://github.com/sondrele/dotfiles.git ~/dev/me/dotfiles
+cd ~/dev/me/dotfiles
+make preview    # se hva som blir linket, og om noe står i veien
+make install    # packages + link + recipes
+```
 
-- Installere docker
-    - https://docs.docker.com/engine/install/ubuntu/
-    - sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+Hvis `make preview` viser konflikter (filer som allerede finnes), flytt dem bort eller kjør
+`stow --adopt --no-folding -t ~ home` og sjekk `git diff` etterpå.
 
-- Installere electron-applikasjoner som `deb`-pakker og gjør klargjør desktop entries for wayland:
-    - `Slack`, og oppdatere desktop entry:
-        - `cp /usr/share/applications/slack.desktop .local/share/applications/`
-        - Endre exec: `Exec=/usr/bin/slack --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto %U`
-    - `Code`, og oppdatere desktop entry:
-        - `cp /usr/share/applications/code.desktop .local/share/applications/`
-        - Endre exec: `Exec=/usr/share/code/code --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto %F`
-    - `Spotify`, og oppdatere desktop entry:
-        - `cp /usr/share/applications/spotify.desktop .local/share/applications/`
-        - Endre exec: `Exec=spotify --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto %U`
+Test før man setter opp en ny maskin: `make test` kjører `make install` i en ny Ubuntu-container
+(`UBUNTU=26.04` som standard). Den tester ikke selve skrivebordet, bare at alt installeres og linkes.
 
--
+3. Sett `fish` til login shell
+
+```bash
+chsh -s "$(command -v fish)"
+```
+
+4. Logg ut og inn igjen
+
+5. Sett opp git-identiteter
+
+Den delte git-configen har ingen identitet. Hver mappe under `~/dev/` med egne repoer får sin
+egen `.gitconfig`, f.eks. `~/dev/<work>/.gitconfig`:
+
+```ini
+[user]
+	name = <name>
+	email = <email>
+[commit]
+	gpgSign = true    # bare der det trengs
+```
+
+Koble mappene til identitetene i `~/.gitconfig` (lokal, ikke i repoet), én blokk per mappe:
+
+```ini
+[includeIf "gitdir:~/dev/me/"]
+	path = ~/dev/me/.gitconfig
+[includeIf "gitdir:~/dev/<work>/"]
+	path = ~/dev/<work>/.gitconfig
+```
+
+Repoer utenfor disse mappene har ingen identitet, og git nekter å committe der i stedet for å
+gjette. Sjekk med `git config user.email` i et repo.
+
+## Til daglig
+
+| Kommando        | Hva                                                             |
+|-----------------|-----------------------------------------------------------------|
+| `make doctor`   | Viser avvik: manglende linker, pakker, ucommittede endringer    |
+| `make link`     | Linker nye filer fra `home/`                                    |
+
+Fish kjører `doctor --quiet` én gang per døgn og sier fra med én linje hvis noe har drevet.
+
+Ny config: legg filen på riktig sti under `home/` og kjør `make link`.
+
+Pakker holdes for hånd i `packages/apt.txt`. Det som ikke passer der (egne repoer, apper som
+installeres som `deb`) står under «Manuelt».
+
+## Manuelt
+
+- Electron-apper som `deb`-pakker: Slack, Code, Spotify.
+    - Nyere Electron velger Wayland selv. Hvis ikke, legg til
+      `--enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto`
+      i `Exec=` i en kopi av `.desktop`-filen under `~/.local/share/applications/`.
+- Nerd Font for ikoner i starship: https://www.nerdfonts.com/

@@ -1,0 +1,3 @@
+#!/bin/sh
+# Ubuntu ships fd as fdfind; tools like fzf.fish expect fd
+exec fdfind "$@"

@@ -1,0 +1,28 @@
+# One Ubuntu package per line. Installed by `make packages`.
+# Things that need a third-party repo or script go in packages/recipes/ instead.
+
+# bootstrap
+curl
+git
+make
+stow
+
+# shell and CLI
+bat
+fd-find
+fish
+fzf
+git-delta
+jq
+ripgrep
+tree
+
+# desktop
+fonts-jetbrains-mono
+ghostty
+rfkill
+slurp
+sway
+wev
+wl-clipboard
+xdg-desktop-portal-wlr

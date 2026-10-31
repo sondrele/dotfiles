@@ -1,7 +1,0 @@
-wm.bar.status_config: ~/.config/i3status-rust/config.toml
-
-# Overstyrt til `plus` fordi det er samme tast på norsk querty
-wm.binding.help: Shift+plus
-
-# Overstyrt slik at det ikke går i veien for ønsket oppsett for `help`
-wm.binding.inc_gaps_big: Shift+Alt+plus

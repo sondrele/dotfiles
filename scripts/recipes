@@ -1,0 +1,10 @@
+#!/bin/bash
+# Run every recipe in packages/recipes/. Each recipe skips itself when already done.
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+for recipe in packages/recipes/*.sh; do
+    echo "==> $recipe"
+    bash "$recipe"
+done

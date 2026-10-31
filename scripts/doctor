@@ -1,0 +1,45 @@
+#!/bin/bash
+# Report drift between this machine and the repo.
+#   --quiet  print a single line, and only when something drifted (used by fish on login)
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+QUIET=false
+[ "${1:-}" = "--quiet" ] && QUIET=true
+
+problems=()
+
+# links: stow in simulate mode lists what it would still have to link, and conflicts
+if command -v stow >/dev/null; then
+    stow_out=$(stow -n -v --no-folding -t "$HOME" home 2>&1 || true)
+    missing=$(grep -c '^LINK:' <<<"$stow_out" || true)
+    conflicts=$(grep -c 'existing target' <<<"$stow_out" || true)
+    [ "$missing" -gt 0 ] && problems+=("$missing file(s) not linked (make link)")
+    [ "$conflicts" -gt 0 ] && problems+=("$conflicts real file(s) in the way of links (make preview)")
+else
+    problems+=("stow is not installed")
+fi
+
+# packages listed in apt.txt but not installed
+not_installed=()
+for pkg in $(grep -v '^\s*\(#\|$\)' packages/apt.txt); do
+    dpkg-query -W -f='${db:Status-Status}' "$pkg" 2>/dev/null | grep -q '^installed$' || not_installed+=("$pkg")
+done
+[ ${#not_installed[@]} -gt 0 ] && problems+=("not installed from apt.txt: ${not_installed[*]} (make packages)")
+
+# uncommitted changes, including tools writing back into home/
+changed=$(git status --porcelain | wc -l)
+[ "$changed" -gt 0 ] && problems+=("$changed uncommitted change(s) in $(pwd)")
+
+if [ ${#problems[@]} -eq 0 ]; then
+    $QUIET || echo "dotfiles: all good"
+    exit 0
+fi
+
+if $QUIET; then
+    echo "dotfiles: ${#problems[@]} thing(s) drifted, run 'make doctor' in $(pwd)"
+else
+    printf -- '- %s\n' "${problems[@]}"
+fi
+exit 1

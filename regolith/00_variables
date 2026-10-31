@@ -1,9 +1,0 @@
-# Super 
-# set $mod Mod4
-# Alt
-set $mod2 Mod1
-
-# make sure that firefox, vscode (and other programs?) does not quit when accidentally pressing ctrl+q
-bindsym Control+q exec echo "" > /dev/null
-
-

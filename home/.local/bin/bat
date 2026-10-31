@@ -1,0 +1,3 @@
+#!/bin/sh
+# Ubuntu ships bat as batcat; tools like fzf.fish expect bat
+exec batcat "$@"

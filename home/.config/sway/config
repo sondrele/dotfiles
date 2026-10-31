@@ -1,0 +1,256 @@
+# Sway config: keybindings, input, startup and window rules, all in one file.
+#
+# Noctalia is the desktop shell (bar, launcher, notifications, lock screen, idle,
+# night light, screenshots, OSDs). It is started at the bottom and controlled with
+# `noctalia msg <command>`; list all commands with `noctalia msg --help`.
+#
+# Bindings come from the old i3 config, plus Noctalia panels and the laptop's Fn keys.
+# Reload with $mod+Shift+c, check syntax with `sway --validate`.
+
+# Set $mod key to Super
+set $mod Mod4
+
+# Set $mod2 key to Alt
+set $mod2 Mod1
+
+set $ipc noctalia msg
+
+set $term ghostty
+
+# Ubuntu's sway package ships snippets here that hand the session environment to
+# systemd/D-Bus. Screen sharing (xdg-desktop-portal-wlr) and notifications need it.
+include /etc/sway/config.d/*
+
+####################################################################################################
+# Input and output
+####################################################################################################
+
+input type:keyboard {
+    xkb_layout no
+    # GTK 4 on Wayland drops dead keys without an input method (~ ^ ` never arrive in ghostty),
+    # so type them directly instead: https://github.com/ghostty-org/ghostty/discussions/8899
+    xkb_variant nodeadkeys
+    # xkb_layout us,no
+    # xkb_options caps:escape
+}
+
+input type:touchpad {
+    tap enabled
+    dwt enabled
+    natural_scroll enabled
+}
+
+# `swaymsg -t get_outputs` lists names and modes
+# output eDP-1 scale 1.25
+
+####################################################################################################
+# Program shortcuts
+####################################################################################################
+
+bindsym $mod+Return exec $term
+bindsym $mod+n      exec firefox
+bindsym $mod+o      exec code
+
+bindsym $mod+space exec $ipc panel-toggle launcher
+bindsym $mod+p     exec $ipc panel-toggle launcher
+bindsym $mod+c     exec $ipc panel-toggle control-center
+bindsym $mod+comma exec $ipc settings-toggle
+bindsym $mod+Shift+v exec $ipc panel-toggle clipboard
+
+# keyboard layout toggle
+# bindsym $mod+Control+1 input type:keyboard xkb_switch_layout 0
+# bindsym $mod+Control+2 input type:keyboard xkb_switch_layout 1
+
+# make sure that firefox, vscode (and other programs?) does not quit when accidentally pressing ctrl+q
+bindsym Control+q nop
+
+# Screen lock and session menu (suspend, logout, reboot, poweroff)
+bindsym $mod+Escape exec $ipc session lock
+bindsym $mod+x exec $ipc panel-toggle session
+
+# Screenshots
+bindsym Print       exec $ipc screenshot-region
+bindsym Shift+Print exec $ipc screenshot-annotate
+
+# Media
+bindsym $mod+Control+Left  exec $ipc media previous
+bindsym $mod+Control+Right exec $ipc media next
+bindsym $mod+Control+Down  exec $ipc media toggle
+bindsym --locked XF86AudioPrev exec $ipc media previous
+bindsym --locked XF86AudioNext exec $ipc media next
+bindsym --locked XF86AudioPlay exec $ipc media toggle
+
+# Volume, brightness and the rest of the Fn row. `wev` shows what a key sends.
+bindsym $mod2+k       exec $ipc volume-up
+bindsym $mod2+Shift+k exec $ipc volume-up 1
+bindsym $mod2+j       exec $ipc volume-down
+bindsym $mod2+Shift+j exec $ipc volume-down 1
+bindsym --locked XF86AudioRaiseVolume  exec $ipc volume-up
+bindsym --locked XF86AudioLowerVolume  exec $ipc volume-down
+bindsym --locked XF86AudioMute         exec $ipc volume-mute
+bindsym --locked XF86AudioMicMute      exec $ipc mic-mute
+bindsym --locked XF86MonBrightnessUp   exec $ipc brightness-up
+bindsym --locked XF86MonBrightnessDown exec $ipc brightness-down
+bindsym XF86RFKill  exec rfkill toggle all
+bindsym XF86Display exec $ipc settings-toggle
+
+####################################################################################################
+# Window management
+####################################################################################################
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
+
+# change focus
+bindsym $mod+h         focus left
+bindsym $mod+j         focus down
+bindsym $mod+Tab       focus down
+bindsym $mod+k         focus up
+bindsym $mod+Shift+Tab focus up
+bindsym $mod+l         focus right
+
+# Noctalia alternative for Alt+Tab
+bindsym $mod2+Tab exec $ipc window-switcher hold
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# move workspace
+bindsym $mod+Shift+Left  move workspace to output left
+bindsym $mod+Shift+Up    move workspace to output up
+bindsym $mod+Shift+Right move workspace to output right
+bindsym $mod+Shift+Down  move workspace to output down
+
+# split in horizontal orientation
+bindsym $mod+b split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+Control+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+bindsym $mod+d focus child
+
+# switch to workspace
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+
+workspace_auto_back_and_forth yes
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# exit sway (logs you out of your Wayland session)
+bindsym $mod+Shift+p exec swaynag -t warning -m 'Exit sway? This ends your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+####################################################################################################
+# Resizing and moving
+####################################################################################################
+
+mode "resize" {
+    # These bindings trigger as soon as you enter the resize mode
+    bindsym h resize shrink width 10 px or 10 ppt
+    bindsym j resize grow height 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Use Alt to directly resize windows
+bindsym $mod2+h resize grow width 30 px or 10 ppt
+bindsym $mod2+l resize shrink width 30 px or 10 ppt
+
+# Use Mouse+$mod to drag floating windows, Mouse+$mod+right-click to resize them
+floating_modifier $mod normal
+
+####################################################################################################
+# Window rules
+####################################################################################################
+
+# Spotify lives in the scratchpad. It may run under XWayland (class) or natively (app_id).
+for_window [class="Spotify"]   mark spotify, move scratchpad, border pixel 1
+for_window [app_id="spotify"]  mark spotify, move scratchpad, border pixel 1
+bindsym $mod2+s [con_mark="spotify"] scratchpad show
+
+# Enable floating for programs that does not need to cover the whole screen
+# `swaymsg -t get_tree` (or `wlprop`) shows app_id/class of a window
+for_window [app_id="org.gnome.Calculator"] floating enable
+for_window [app_id="org.gnome.FileRoller"] floating enable
+for_window [window_role="pop-up"]          floating enable
+for_window [window_role="dialog"]          floating enable
+
+####################################################################################################
+# Look
+####################################################################################################
+
+font pango:JetBrains Mono 11
+
+default_border normal 2
+
+# Window title color (Dracula)
+# class                 border  bground text    indicator child_border
+client.focused          #6272A4 #6272A4 #F8F8F2 #bd93f9   #6272A4
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+
+# Wait before switching from urgency to focused
+force_display_urgency_hint 500 ms
+
+####################################################################################################
+# Startup
+####################################################################################################
+
+# Noctalia replaces the sway bar, so there is no `bar {}` block here
+exec noctalia
