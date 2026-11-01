@@ -1,0 +1,33 @@
+# Monitor profiles. kanshi uses the profile whose screens match what's connected, and switches
+# automatically when screens are plugged in or out. After editing, run `kanshictl reload`.
+#
+# `swaymsg -t get_outputs` lists the screens. For external screens, use the quoted
+# "make model serial" description so a profile matches that exact monitor on any port.
+# `nwg-displays` is handy for dragging screens into place to read off positions and scales.
+
+# When several profiles match, the first one wins, so machine-specific profiles go before
+# generic ones. Match a built-in screen by its description to tell the laptops apart.
+
+profile personal-laptop {
+    output "Samsung Display Corp. 0x4165 Unknown" enable scale 1.75
+}
+
+profile laptop {
+    output eDP-1 enable scale 1
+}
+
+# Home desk: the Dell to the left (5120 px at 1.25 = 4096 logical), laptop to its right
+profile personal-home {
+    output "Dell Inc. DELL U4021QW 3W1SX83" enable mode 5120x2160 position 0,0 scale 1.25
+    output "Samsung Display Corp. 0x4165 Unknown" enable position 4096,0 scale 1.75
+}
+
+profile home {
+    output "Dell Inc. DELL U4021QW 3W1SX83" enable mode 5120x2160 position 0,0 scale 1.25
+    output eDP-1 enable position 4096,0 scale 1
+}
+
+# profile <name> {
+#     output eDP-1 enable position <x>,<y> scale <scale>
+#     output "<make> <model> <serial>" enable mode <width>x<height> position <x>,<y> scale <scale>
+# }

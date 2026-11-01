@@ -40,8 +40,16 @@ input type:touchpad {
     natural_scroll enabled
 }
 
-# `swaymsg -t get_outputs` lists names and modes
-# output eDP-1 scale 1.25
+# Monitors are set up by kanshi (~/.config/kanshi/config, started below), which switches profile
+# when screens are plugged in or out. Keep `output` lines out of this file, or they fight kanshi.
+
+# Turn the laptop screen off while the lid is closed, and back on when it opens
+bindswitch --reload --locked lid:on  output eDP-1 disable
+bindswitch --reload --locked lid:off output eDP-1 enable
+
+# Hide the mouse cursor after 5 seconds without movement, and while typing
+seat * hide_cursor 5000
+seat * hide_cursor when-typing enable
 
 ####################################################################################################
 # Program shortcuts
@@ -235,7 +243,16 @@ for_window [window_role="dialog"]          floating enable
 
 font pango:JetBrains Mono 11
 
-default_border normal 2
+# 1 px borders, no title bars, and no border against the screen edge
+default_border pixel 1
+default_floating_border pixel 1
+hide_edge_borders smart
+
+# 5 px between windows, none when a workspace has a single window
+gaps inner 5
+smart_gaps on
+bindsym $mod+$mod2+plus  gaps inner current plus 5
+bindsym $mod+$mod2+minus gaps inner current minus 5
 
 # Window title color (Dracula)
 # class                 border  bground text    indicator child_border
@@ -254,3 +271,4 @@ force_display_urgency_hint 500 ms
 
 # Noctalia replaces the sway bar, so there is no `bar {}` block here
 exec noctalia
+exec kanshi

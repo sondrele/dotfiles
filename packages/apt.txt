@@ -20,6 +20,8 @@ tree
 # desktop
 fonts-jetbrains-mono
 ghostty
+kanshi
+nwg-displays
 rfkill
 slurp
 sway

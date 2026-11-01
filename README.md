@@ -78,6 +78,21 @@ Ny config: legg filen på riktig sti under `home/` og kjør `make link`.
 Pakker holdes for hånd i `packages/apt.txt`. Det som ikke passer der (egne repoer, apper som
 installeres som `deb`) står under «Manuelt».
 
+## Skjermer
+
+Skjermoppsettet styres av [kanshi](https://sr.ht/~emersion/kanshi/) (`home/.config/kanshi/config`),
+ikke av Noctalia eller sway-configen. kanshi har én profil per oppsett (bare laptop, hjemme, jobb …)
+og bytter automatisk når skjermer kobles til eller fra.
+
+Ny profil:
+
+1. Koble til skjermen og åpne `nwg-displays`. Dra skjermene på plass og les av posisjon og skala.
+2. Finn skjermens navn med `swaymsg -t get_outputs` (bruk «make model serial»-beskrivelsen i
+   anførselstegn, så matcher profilen akkurat den skjermen uansett port).
+3. Legg til en `profile` i `home/.config/kanshi/config` og kjør `kanshictl reload`.
+
+Laptopskjermen slås av når lokket lukkes og på igjen når det åpnes.
+
 ## Manuelt
 
 - Electron-apper som `deb`-pakker: Slack, Code, Spotify.
