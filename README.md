@@ -31,15 +31,9 @@ Hvis `make preview` viser konflikter (filer som allerede finnes), flytt dem bort
 Test før man setter opp en ny maskin: `make test` kjører `make install` i en ny Ubuntu-container
 (`UBUNTU=26.04` som standard). Den tester ikke selve skrivebordet, bare at alt installeres og linkes.
 
-3. Sett `fish` til login shell
+3. Logg ut og inn igjen, så `fish` blir login shell (`make install` setter det)
 
-```bash
-chsh -s "$(command -v fish)"
-```
-
-4. Logg ut og inn igjen
-
-5. Sett opp git-identiteter
+4. Sett opp git-identiteter
 
 Den delte git-configen har ingen identitet. Hver mappe under `~/dev/` med egne repoer får sin
 egen `.gitconfig`, f.eks. `~/dev/<work>/.gitconfig`:
