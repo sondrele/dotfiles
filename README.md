@@ -72,6 +72,13 @@ Ny config: legg filen på riktig sti under `home/` og kjør `make link`.
 Pakker holdes for hånd i `packages/apt.txt`. Det som ikke passer der (egne repoer, apper som
 installeres som `deb`) står under «Manuelt».
 
+## Noctalia
+
+Felles oppsett (bar, tema) ligger i `home/.config/noctalia/config.toml`. Endringer gjort i
+Noctalias innstillinger lagres i `~/.local/state/noctalia/settings.toml` og vinner over filen.
+Flytt det som skal beholdes til `config.toml`, fjern det fra `settings.toml`, og sjekk med
+`noctalia config validate`.
+
 ## Skjermer
 
 Skjermoppsettet styres av [kanshi](https://sr.ht/~emersion/kanshi/) (`home/.config/kanshi/config`),

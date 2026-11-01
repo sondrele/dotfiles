@@ -1,0 +1,14 @@
+# Noctalia reads every *.toml in ~/.config/noctalia/ and merges them. Changes made in Noctalia's
+# settings dialog are saved to ~/.local/state/noctalia/settings.toml instead, and win over this
+# file, so move keepers from there to here and remove them there. Reference:
+# https://docs.noctalia.dev/noctalia/configuration/
+
+[bar.default]
+position = "bottom"
+# the defaults, plus the focused window's title, since windows have no title bars
+start = ["launcher", "wallpaper", "workspaces", "active_window"]
+
+[theme]
+source = "builtin"                 # builtin | community | wallpaper
+builtin = "Dracula"
+community_palette = "Oxocarbon"    # used when source = "community"
