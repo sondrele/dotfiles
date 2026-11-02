@@ -25,6 +25,7 @@ nwg-displays
 rfkill
 slurp
 sway
+swayidle
 wev
 wl-clipboard
 xdg-desktop-portal-wlr

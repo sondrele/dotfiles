@@ -12,3 +12,10 @@ start = ["launcher", "wallpaper", "workspaces", "active_window"]
 source = "builtin"                 # builtin | community | wallpaper
 builtin = "Dracula"
 community_palette = "Oxocarbon"    # used when source = "community"
+
+# Lock after 10 minutes without input. Apps that inhibit idle (video in a browser, presentations)
+# hold it off. Noctalia ships this behavior, but disabled.
+[idle.behavior.lock]
+timeout = 600
+action = "lock"
+enabled = true

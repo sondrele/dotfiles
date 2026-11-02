@@ -272,3 +272,6 @@ force_display_urgency_hint 500 ms
 # Noctalia replaces the sway bar, so there is no `bar {}` block here
 exec noctalia
 exec kanshi
+
+# Machine-specific settings, not in the repo (see README)
+include ~/.config/sway/config.d/*

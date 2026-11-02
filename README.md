@@ -58,6 +58,17 @@ Koble mappene til identitetene i `~/.gitconfig` (lokal, ikke i repoet), én blok
 Repoer utenfor disse mappene har ingen identitet, og git nekter å committe der i stedet for å
 gjette. Sjekk med `git config user.email` i et repo.
 
+5. Valgfritt: maskiner der enhetssjekker krever `swayidle`
+
+Legg denne i `~/.config/sway/config.d/idle` (lokal, ikke i repoet). Den låser også før dvale:
+
+```
+exec swayidle -w \
+    timeout 600 'noctalia msg session lock' \
+    timeout 660 'noctalia msg dpms-off' resume 'noctalia msg dpms-on' \
+    before-sleep 'noctalia msg session lock'
+```
+
 ## Til daglig
 
 | Kommando        | Hva                                                             |
@@ -73,6 +84,8 @@ Pakker holdes for hånd i `packages/apt.txt`. Det som ikke passer der (egne repo
 installeres som `deb`) står under «Manuelt».
 
 ## Noctalia
+
+Skjermen låses etter 10 minutter via Noctalia (`config.toml`).
 
 Felles oppsett (bar, tema) ligger i `home/.config/noctalia/config.toml`. Endringer gjort i
 Noctalias innstillinger lagres i `~/.local/state/noctalia/settings.toml` og vinner over filen.
