@@ -202,10 +202,10 @@ bindsym $mod+Shift+p exec swaynag -t warning -m 'Exit sway? This ends your Wayla
 
 mode "resize" {
     # These bindings trigger as soon as you enter the resize mode
-    bindsym h resize shrink width 10 px or 10 ppt
-    bindsym j resize grow height 10 px or 10 ppt
-    bindsym k resize shrink height 10 px or 10 ppt
-    bindsym l resize grow width 10 px or 10 ppt
+    bindsym h resize shrink width 50 px or 10 ppt
+    bindsym j resize grow height 50 px or 10 ppt
+    bindsym k resize shrink height 50 px or 10 ppt
+    bindsym l resize grow width 50 px or 10 ppt
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -215,8 +215,8 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Use Alt to directly resize windows
-bindsym $mod2+h resize grow width 30 px or 10 ppt
-bindsym $mod2+l resize shrink width 30 px or 10 ppt
+bindsym $mod2+h resize shrink width 50 px or 10 ppt
+bindsym $mod2+l resize grow width 50 px or 10 ppt
 
 # Use Mouse+$mod to drag floating windows, Mouse+$mod+right-click to resize them
 floating_modifier $mod normal
@@ -243,9 +243,9 @@ for_window [window_role="dialog"]          floating enable
 
 font pango:JetBrains Mono 11
 
-# 1 px borders, no title bars, and no border against the screen edge
-default_border pixel 1
-default_floating_border pixel 1
+# 2 px borders, no title bars, and no border against the screen edge
+default_border pixel 2
+default_floating_border pixel 2
 hide_edge_borders smart
 
 # 5 px between windows, none when a workspace has a single window
