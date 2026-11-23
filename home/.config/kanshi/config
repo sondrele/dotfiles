@@ -27,6 +27,11 @@ profile home {
     output eDP-1 enable position 4096,0 scale 1
 }
 
+profile work {
+    output eDP-1 enable position 0,583 scale 1
+    output "Dell Inc. DELL U3419W 113TWP2" enable mode 3440x1440 position 1920,343 scale 1
+}
+
 # profile <name> {
 #     output eDP-1 enable position <x>,<y> scale <scale>
 #     output "<make> <model> <serial>" enable mode <width>x<height> position <x>,<y> scale <scale>
