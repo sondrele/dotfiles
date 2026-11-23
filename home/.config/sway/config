@@ -78,7 +78,7 @@ bindsym $mod+x exec $ipc panel-toggle session
 
 # Screenshots
 bindsym Print       exec $ipc screenshot-region
-bindsym Shift+Print exec $ipc screenshot-annotate
+bindsym $mod+Print exec $ipc screenshot-annotate
 
 # Media
 bindsym $mod+Control+Left  exec $ipc media previous
