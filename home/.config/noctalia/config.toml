@@ -8,6 +8,9 @@ position = "bottom"
 # the defaults, plus the focused window's title, since windows have no title bars
 start = ["launcher", "wallpaper", "workspaces", "active_window"]
 
+[widget.clock]
+format = "Uke %V | %d.%m.%Y | %H:%M:%S"
+
 [theme]
 source = "builtin"                 # builtin | community | wallpaper
 builtin = "Dracula"
